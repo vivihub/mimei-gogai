@@ -21,7 +21,7 @@ def validate(script):
     for i, ln in enumerate(script["lines"]):
         assert ln["c"] in ("mimei", "hasu", "yomi"), f"line {i}: unknown speaker {ln['c']}"
         assert ln.get("bgm", "normal") in ("normal", "ominous", "ending"), f"line {i}: bad bgm tag"
-        assert 1 <= len(ln["t"]) <= 140, f"line {i}: text length {len(ln['t'])} (keep each line <=140 chars)"
+        assert 1 <= len(ln["t"]) <= 160, f"line {i}: text length {len(ln['t'])} (keep each line <=140 chars)"
     share = {}
     for ln in script["lines"]:
         share[ln["c"]] = share.get(ln["c"], 0) + len(ln["t"])

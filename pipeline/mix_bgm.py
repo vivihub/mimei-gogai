@@ -38,10 +38,12 @@ def main():
         # scene timeline
         segs = []; t = 0.0
         first = script["lines"][0].get("bgm", "normal")
-        segs.append((first, t, t + R.TITLE_DUR)); t += R.TITLE_DUR
-        for m, ln in zip(meta, script["lines"]):
-            d = m["dur"] + R.GAP; segs.append((ln.get("bgm", "normal"), t, t + d)); t += d
-        segs.append(("ending", t, t + R.END_DUR))
+        cur = first
+        for kind, d, p in R.timeline():
+            if kind == "line":
+                i = p["i"]; cur = script["lines"][i].get("bgm", "normal")
+            scene = "ending" if kind == "end" else (first if kind == "title" else cur)
+            segs.append((scene, t, t + d)); t += d
         # merge consecutive same-scene segments
         merged = []
         for s, a, b in segs:

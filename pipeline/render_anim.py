@@ -111,13 +111,20 @@ def main():
     def emit(img): ff.stdin.write(img.convert("RGB").tobytes())
 
     t = 0.0
-    title = R.title_frame().convert("RGB").tobytes()
-    for _ in range(int(TITLE_DUR * FPS)): ff.stdin.write(title)
-    t += TITLE_DUR
     blinkers = {k: Blinker(i) for i, k in enumerate(["mimei", "hasu", "yomi"])}
-    for m in meta:
+    for kind, dur, p in R.timeline():
+        if kind == "title":
+            fr = R.title_frame().convert("RGB").tobytes()
+            for _ in range(int(dur * FPS)): ff.stdin.write(fr)
+            t += dur; continue
+        if kind == "chapter":
+            fr = R.chapter_frame(*p).convert("RGB").tobytes()
+            for _ in range(int(dur * FPS)): ff.stdin.write(fr)
+            t += dur; continue
+        if kind == "end": break
+        m = p
         base = static_base(m["c"], m["t"])
-        n = int(round((m["dur"] + GAP) * FPS))
+        n = int(round(dur * FPS))
         env = envelope(m["wav"], n)
         for i in range(n):
             tt = t + i / FPS

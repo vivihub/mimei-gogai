@@ -13,6 +13,7 @@ python pipeline/pipeline.py --script pipeline/episodes/hachishaku.json
 - `id, title, subtitle, thumb_text, category, summary, sources[]`
 - `lines[]`: `{"c": "mimei|hasu|yomi", "bgm": "normal|ominous|ending", "t": "台詞（140字以内）"}`
 - ミメイ（MC）7〜8割、ヨミ＝質問役、ハス＝不穏な一言。冒頭は挨拶なしでフックから。
+- 行に `"chapter": "章タイトル"` を付けると、その行の前に2秒の章カードが入る（10分尺は5〜6章・60〜75行。手本: `episodes/hachishaku_long.json`）
 
 ## 構成
 `tts.py`（VOICEVOX）→ `render.py`（静止フレーム・voice.wav）→ `mix_bgm.py`（bgm/ の normal/ominous/ending を場面切替・ダッキング）→ `render_anim.py`（口パク・まばたき・30fps）→ `pipeline.py`（サムネ・説明文）

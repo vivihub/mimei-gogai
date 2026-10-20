@@ -161,26 +161,51 @@ def end_frame():
     d.text((120, H - 70), "VOICEVOX:雀松朱司／中部つるぎ／小夜SAYO", font=F(SANS, 22), fill=MUTED)
     return img
 
+CHAPTER_DUR = 2.0
+
+def chapter_frame(num, text):
+    img = background(); d = ImageDraw.Draw(img); masthead(d)
+    d.line([(120, 420), (420, 420)], fill=ACCENT, width=4)
+    d.text((120, 300), f"第{num}面", font=F(SANS, 40), fill=ACCENT)
+    tf = F(SERIF, 100); y = 450
+    for ln in wrap(text, tf, W - 240, d)[:2]:
+        d.text((120, y), ln, font=tf, fill=INK); y += 130
+    return img
+
+def timeline():
+    """Shared segment list: (kind, dur, payload). kind = title|chapter|line|end."""
+    segs = [("title", TITLE_DUR, None)]
+    n = 0
+    for m, ln in zip(meta, script["lines"]):
+        if ln.get("chapter"):
+            n += 1; segs.append(("chapter", CHAPTER_DUR, (n, ln["chapter"])))
+        segs.append(("line", m["dur"] + GAP, m))
+    segs.append(("end", END_DUR, None))
+    return segs
+
 def main():
     out = os.path.join(ROOT, "out"); os.makedirs(out, exist_ok=True)
     title_frame().save(os.path.join(out, "f_title.png"))
     end_frame().save(os.path.join(out, "f_end.png"))
-    segs = [("f_title.png", TITLE_DUR, None)]
-    for m in meta:
-        fn = f"f_{m['i']:02d}.png"
-        frame_for(m["c"], m["t"]).save(os.path.join(out, fn))
-        segs.append((fn, m["dur"] + GAP, m["wav"]))
-    segs.append(("f_end.png", END_DUR, None))
+    segs = []
+    for kind, dur, p in timeline():
+        if kind == "title": segs.append(("f_title.png", dur, None))
+        elif kind == "end": segs.append(("f_end.png", dur, None))
+        elif kind == "chapter":
+            fn = f"f_ch{p[0]:02d}.png"; chapter_frame(*p).save(os.path.join(out, fn)); segs.append((fn, dur, None))
+        else:
+            fn = f"f_{p['i']:02d}.png"; frame_for(p["c"], p["t"]).save(os.path.join(out, fn)); segs.append((fn, dur, p["wav"]))
 
     # audio track: concat with silence padding (VOICEVOX: 24kHz mono 16-bit)
     sr = 24000
-    chunks = [np.zeros(int(sr * TITLE_DUR), np.int16)]
-    for fn, dur, wav in segs[1:-1]:
+    chunks = []
+    for fn, dur, wav in segs:
+        if wav is None:
+            chunks.append(np.zeros(int(sr * dur), np.int16)); continue
         with wave.open(wav) as w:
             assert w.getframerate() == sr and w.getnchannels() == 1
             chunks.append(np.frombuffer(w.readframes(w.getnframes()), np.int16))
         chunks.append(np.zeros(int(sr * GAP), np.int16))
-    chunks.append(np.zeros(int(sr * END_DUR), np.int16))
     audio = np.concatenate(chunks)
     with wave.open(os.path.join(out, "voice.wav"), "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes(audio.tobytes())
