@@ -20,6 +20,9 @@ NAMES = {"mimei": ("ミメイ", "未明新聞・配達員", "#B394DB"),
          "hasu": ("ハス", "黄泉に咲く蓮", "#7FB2D8"),
          "yomi": ("ヨミ", "読み／黄泉", "#E39BC0")}
 IMGFILE = {"mimei": "gogai", "hasu": "hogo", "yomi": "yomi"}   # image file stems (unchanged)
+CHANNEL = "聞かせて、怪異放送。"            # YouTube チャンネル名（マストヘッド・エンドカード）
+CHANNEL_HANDLE = "@聞かせて怪異放送"
+CHANNEL_URL = "https://www.youtube.com/@聞かせて怪異放送"
 SLOTS = {"mimei": 250, "yomi": 640, "hasu": 1030}   # x-center of each standing character
 PORTRAIT_H = 700
 
@@ -51,7 +54,7 @@ def masthead(d):
     d.line([(60, 56), (W - 60, 56)], fill=INK, width=3)
     d.line([(60, 62), (W - 60, 62)], fill=INK, width=1)
     d.text((80, 72), "未明新聞", font=F(SERIF, 54), fill=INK)
-    d.text((330, 92), "未明シアター 非公式配達所", font=F(SANS, 22), fill=INK2)
+    d.text((330, 92), CHANNEL, font=F(SANS, 22), fill=INK2)
     # 号外 seal
     d.rounded_rectangle([W - 230, 80, W - 80, 134], radius=4, outline=SEAL, width=3)
     d.text((W - 155, 107), "号　外", font=F(SERIF, 30), fill=SEAL, anchor="mm")
@@ -157,7 +160,7 @@ def end_frame():
     d.text((120, 480), "次の号外は、水曜と土曜の夜に。", font=F(SANS, 40), fill=INK2)
     d.rounded_rectangle([120, 580, 620, 660], radius=6, fill=ACCENT)
     d.text((370, 620), "チャンネル登録", font=F(SERIF, 38), fill="#1A1224", anchor="mm")
-    d.text((120, 700), "YouTube 未明シアター  @mimei_theater", font=F(SANS, 28), fill=MUTED)
+    d.text((120, 700), f"YouTube {CHANNEL}  {CHANNEL_HANDLE}", font=F(SANS, 28), fill=MUTED)
     d.text((120, H - 70), "VOICEVOX:雀松朱司／中部つるぎ／小夜SAYO", font=F(SANS, 22), fill=MUTED)
     return img
 

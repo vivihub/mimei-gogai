@@ -10,6 +10,7 @@ command -v ffmpeg >/dev/null || { echo "ffmpeg missing"; exit 1; }
 # NOTE: no `grep -q` here — under pipefail it exits early and fc-list dies with SIGPIPE (rc 141), a false "missing".
 fc-list | grep "Noto Serif CJK" >/dev/null || { echo "Noto CJK fonts missing"; exit 1; }
 python3 -c "import PIL, numpy" 2>/dev/null || pip install --break-system-packages -q pillow numpy
+python3 -c "import googleapiclient, google.oauth2" 2>/dev/null || pip install --break-system-packages -q google-api-python-client google-auth  # upload_youtube.py
 
 if ! python3 -c "import pyopenjtalk" 2>/dev/null; then
   pip install --break-system-packages -q pyopenjtalk

@@ -3,3 +3,6 @@ audio/
 out/
 script.json
 __pycache__/
+# YouTube OAuth secrets — never commit (public repo)
+youtube_oauth.json
+client_secret*.json

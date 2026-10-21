@@ -46,10 +46,12 @@ def thumbnail(script, dst):
     img.convert("RGB").save(dst, quality=92)
 
 def description(script, sources, dst):
+    import render as R
     lines = [script["title"], "", script.get("subtitle", ""), ""]
     if script.get("summary"): lines += [script["summary"], ""]
     lines += ["■ 出典・参考", *[f"・{s}" for s in sources], "",
-              "■ 出演", "ミメイ／ハス／ヨミ（未明新聞）", "", "■ 音声", CREDIT, "",
+              "■ 出演", "ミメイ／ハス／ヨミ（未明新聞）", "",
+              "■ チャンネル", f"{R.CHANNEL} {R.CHANNEL_URL}", "", "■ 音声", CREDIT, "",
               "※本動画の音声はAI音声合成、キャラクターの動きはプログラムによる自動生成です。",
               "※内容は公開情報をもとに構成しています。事実関係は出典をご確認ください。", "",
               "#都市伝説 #未解決事件 #オカルト #未明新聞 #ゆっくり解説"]

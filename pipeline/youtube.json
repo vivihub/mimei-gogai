@@ -1,0 +1,12 @@
+{
+  "_comment": "YouTube 自動投稿の設定。privacy: public|unlisted|private。publish_hour_jst を数値にすると、その日の JST 指定時刻に予約公開（アップロード直後は非公開のまま）。null なら privacy のまま即時。",
+  "channel": "聞かせて、怪異放送。",
+  "channel_url": "https://www.youtube.com/@聞かせて怪異放送",
+  "privacy": "public",
+  "publish_hour_jst": 20,
+  "category_id": "24",
+  "default_language": "ja",
+  "tags": ["都市伝説", "怪談", "未解決事件", "オカルト", "未明新聞", "聞かせて怪異放送", "VOICEVOX", "解説"],
+  "title_format": "【{category}】{title}｜{subtitle}",
+  "title_max": 100
+}
