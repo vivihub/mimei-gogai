@@ -16,6 +16,7 @@ VOICE = {  # style id, speed, pitch, intonation  (あまり使われていない
 def main():
     os.chdir(CORE_DIR)  # models are resolved relative to cwd
     script = json.load(open(os.path.join(ROOT, "script.json"), encoding="utf-8"))
+    os.makedirs(os.path.join(ROOT, "audio"), exist_ok=True)  # not tracked in git (empty dir) → create on a fresh clone
     core = VoicevoxCore(open_jtalk_dict_dir=DIC)
     for v in VOICE.values():
         core.load_model(v["sid"])

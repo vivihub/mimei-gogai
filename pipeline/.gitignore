@@ -1,0 +1,5 @@
+# working files produced by pipeline.py (regenerated every run)
+audio/
+out/
+script.json
+__pycache__/
