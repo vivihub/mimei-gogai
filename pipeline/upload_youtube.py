@@ -43,6 +43,33 @@ def build_meta(outdir, cfg, privacy, publish_at):
             "status": status}
     return body, os.path.join(outdir, f"{name}.mp4"), os.path.join(outdir, f"{name}_thumb.jpg")
 
+def set_thumbnail(yt, vid, thumb):
+    """Returns True when set. 403 = channel not yet verified (phone) for custom thumbnails — report, don't fail."""
+    from googleapiclient.http import MediaFileUpload
+    from googleapiclient.errors import HttpError
+    if not os.path.exists(thumb): print(f"thumbnail file missing: {thumb}", file=sys.stderr); return False
+    try:
+        yt.thumbnails().set(videoId=vid, media_body=MediaFileUpload(thumb, mimetype="image/jpeg")).execute()
+        print("thumbnail set"); return True
+    except HttpError as e:
+        if e.resp.status == 403:
+            print("thumbnail NOT set: チャンネルがカスタムサムネイル未許可（YouTube Studio → 設定 → チャンネル → 機能の利用資格 で電話番号確認が必要）", file=sys.stderr)
+        else:
+            print(f"thumbnail NOT set: {e}", file=sys.stderr)
+        return False
+
+def set_thumbnail_only(a):
+    from googleapiclient.discovery import build
+    rec_path = os.path.join(a.dir, "youtube.json")
+    if not os.path.exists(rec_path): sys.exit(f"no {rec_path} — upload first")
+    rec = json.load(open(rec_path, encoding="utf-8"))
+    name = os.path.basename(a.dir.rstrip("/"))
+    yt = build("youtube", "v3", credentials=load_creds(a.oauth), cache_discovery=False)
+    ok = set_thumbnail(yt, rec["video_id"], os.path.join(a.dir, f"{name}_thumb.jpg"))
+    rec["thumbnail_set"] = ok
+    json.dump(rec, open(rec_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(json.dumps({"video_id": rec["video_id"], "thumbnail_set": ok}, ensure_ascii=False))
+
 def default_publish_at(cfg):
     h = cfg.get("publish_hour_jst")
     if h is None: return None
@@ -58,7 +85,10 @@ def main():
     ap.add_argument("--publish-at", help="ISO-8601 with tz, e.g. 2026-10-21T20:00:00+09:00; 'none' disables the youtube.json default")
     ap.add_argument("--oauth", default=os.environ.get("YT_OAUTH_JSON", "/home/claude/yt_oauth.json"))
     ap.add_argument("--dry-run", action="store_true", help="print the request body, upload nothing")
+    ap.add_argument("--thumb-only", action="store_true", help="only (re)set the thumbnail of the video recorded in <dir>/youtube.json")
     a = ap.parse_args()
+    if a.thumb_only:
+        return set_thumbnail_only(a)
 
     cfg = json.load(open(os.path.join(ROOT, "youtube.json"), encoding="utf-8"))
     privacy = a.privacy or cfg.get("privacy", "private")
@@ -90,12 +120,8 @@ def main():
                 retries += 1; time.sleep(2 ** retries); continue
             raise
     vid = resp["id"]
-    try:
-        if os.path.exists(thumb):
-            yt.thumbnails().set(videoId=vid, media_body=MediaFileUpload(thumb, mimetype="image/jpeg")).execute()
-    except HttpError as e:   # thumbnails need a verified phone on the channel; don't fail the upload over it
-        print(f"thumbnail not set: {e}", file=sys.stderr)
-    result = {"video_id": vid, "url": f"https://youtu.be/{vid}", "privacy": body["status"]["privacyStatus"],
+    thumb_ok = set_thumbnail(yt, vid, thumb)
+    result = {"video_id": vid, "url": f"https://youtu.be/{vid}", "privacy": body["status"]["privacyStatus"], "thumbnail_set": thumb_ok,
               "publish_at": body["status"].get("publishAt"), "title": body["snippet"]["title"],
               "uploaded_at": datetime.datetime.now(JST).isoformat(timespec="seconds")}
     json.dump(result, open(os.path.join(a.dir, "youtube.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)

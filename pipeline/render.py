@@ -53,8 +53,9 @@ def background():
 def masthead(d):
     d.line([(60, 56), (W - 60, 56)], fill=INK, width=3)
     d.line([(60, 62), (W - 60, 62)], fill=INK, width=1)
-    d.text((80, 72), "未明新聞", font=F(SERIF, 54), fill=INK)
-    d.text((330, 92), CHANNEL, font=F(SANS, 22), fill=INK2)
+    d.text((80, 72), CHANNEL, font=F(SERIF, 54), fill=INK)            # 番組名を主題字に
+    cw = d.textlength(CHANNEL, font=F(SERIF, 54))
+    d.text((80 + cw + 30, 92), "未明新聞　号外配達", font=F(SANS, 22), fill=INK2)
     # 号外 seal
     d.rounded_rectangle([W - 230, 80, W - 80, 134], radius=4, outline=SEAL, width=3)
     d.text((W - 155, 107), "号　外", font=F(SERIF, 30), fill=SEAL, anchor="mm")
