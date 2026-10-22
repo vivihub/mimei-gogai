@@ -1,12 +1,6 @@
 {
   "queue": [
     {
-      "id": "kunekune",
-      "title": "くねくね",
-      "genre": "都市伝説",
-      "angle": "田んぼの白い影。見てはいけない『理解すると狂う』型の怪談の構造"
-    },
-    {
       "id": "hinamizawa",
       "title": "ひきこさん",
       "genre": "都市伝説",
@@ -79,6 +73,12 @@
       "title": "口裂け女",
       "date": "2026-10-21",
       "note": "全自動（11分14秒・6章・60行・出典8件）番組名マストヘッド版 https://youtu.be/08YoQEP8rH8（テスト: スマホシアター）"
+    },
+    {
+      "id": "kunekune",
+      "title": "くねくね",
+      "date": "2026-10-23",
+      "note": "全自動（10分33秒・6章・60行・出典6件）本編 https://youtu.be/tZab3nT9Euc ／ ショート https://youtu.be/hqQaf88ujhs（スマホシアター）"
     }
   ]
 }
