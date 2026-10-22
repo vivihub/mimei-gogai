@@ -23,25 +23,36 @@ def load_creds(path):
     creds.refresh(Request())
     return creds
 
-def build_meta(outdir, cfg, privacy, publish_at):
+def build_meta(outdir, cfg, privacy, publish_at, short=False):
     script = json.load(open(os.path.join(outdir, "script.json"), encoding="utf-8"))
     name = os.path.basename(outdir.rstrip("/"))
     desc_path = os.path.join(outdir, f"{name}_description.txt")
     description = open(desc_path, encoding="utf-8").read() if os.path.exists(desc_path) else script.get("summary", "")
-    title = cfg.get("title_format", "{title}").format(category=script.get("category", "未明新聞"),
-                                                      title=script["title"], subtitle=script.get("subtitle", ""))
     mx = cfg.get("title_max", 100)
-    if len(title) > mx:  # YouTube hard limit is 100 chars; fall back to 【category】title
-        title = f"【{script.get('category', '未明新聞')}】{script['title']}"[:mx]
+    if short:
+        hook = script.get("thumb_text") or script.get("subtitle", "")
+        title = f"{script['title']}｜{hook} #Shorts"
+        if len(title) > mx: title = f"{script['title']} #Shorts"[:mx]
+        rec = os.path.join(outdir, "youtube.json")
+        long_url = json.load(open(rec, encoding="utf-8")).get("url") if os.path.exists(rec) else None
+        head = f"{script['title']}（ショート版）\n" + (f"▶ 本編（約10分）はこちら: {long_url}\n\n" if long_url else "\n")
+        description = head + description + "\n#Shorts #都市伝説 #怪談"
+    else:
+        title = cfg.get("title_format", "{title}").format(category=script.get("category", "未明新聞"),
+                                                          title=script["title"], subtitle=script.get("subtitle", ""))
+        if len(title) > mx:  # YouTube hard limit is 100 chars; fall back to 【category】title
+            title = f"【{script.get('category', '未明新聞')}】{script['title']}"[:mx]
     status = {"privacyStatus": privacy, "selfDeclaredMadeForKids": False}
     if publish_at:
         status["privacyStatus"] = "private"   # YouTube requires private + publishAt for scheduled publishing
         status["publishAt"] = publish_at.astimezone(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    body = {"snippet": {"title": title, "description": description[:5000], "tags": cfg.get("tags", []),
+    tags = list(cfg.get("tags", [])) + (["Shorts", "ショート"] if short else [])
+    body = {"snippet": {"title": title, "description": description[:5000], "tags": tags,
                         "categoryId": cfg.get("category_id", "24"), "defaultLanguage": cfg.get("default_language", "ja"),
                         "defaultAudioLanguage": cfg.get("default_language", "ja")},
             "status": status}
-    return body, os.path.join(outdir, f"{name}.mp4"), os.path.join(outdir, f"{name}_thumb.jpg")
+    mp4 = os.path.join(outdir, f"{name}_short.mp4" if short else f"{name}.mp4")
+    return body, mp4, (None if short else os.path.join(outdir, f"{name}_thumb.jpg"))
 
 def set_thumbnail(yt, vid, thumb):
     """Returns True when set. 403 = channel not yet verified (phone) for custom thumbnails — report, don't fail."""
@@ -86,6 +97,7 @@ def main():
     ap.add_argument("--oauth", default=os.environ.get("YT_OAUTH_JSON", "/home/claude/yt_oauth.json"))
     ap.add_argument("--dry-run", action="store_true", help="print the request body, upload nothing")
     ap.add_argument("--thumb-only", action="store_true", help="only (re)set the thumbnail of the video recorded in <dir>/youtube.json")
+    ap.add_argument("--short", action="store_true", help="upload <name>_short.mp4 as a Shorts clip linking to the long video in <dir>/youtube.json")
     a = ap.parse_args()
     if a.thumb_only:
         return set_thumbnail_only(a)
@@ -98,7 +110,7 @@ def main():
     if publish_at and privacy != "public":
         publish_at = None   # scheduled publishing only makes sense for a public release
 
-    body, mp4, thumb = build_meta(a.dir, cfg, privacy, publish_at)
+    body, mp4, thumb = build_meta(a.dir, cfg, privacy, publish_at, short=a.short)
     if not os.path.exists(mp4): sys.exit(f"mp4 not found: {mp4}")
     print(json.dumps({"title": body["snippet"]["title"], "status": body["status"], "mp4": mp4}, ensure_ascii=False))
     if a.dry_run: return
@@ -120,11 +132,11 @@ def main():
                 retries += 1; time.sleep(2 ** retries); continue
             raise
     vid = resp["id"]
-    thumb_ok = set_thumbnail(yt, vid, thumb)
+    thumb_ok = set_thumbnail(yt, vid, thumb) if thumb else None
     result = {"video_id": vid, "url": f"https://youtu.be/{vid}", "privacy": body["status"]["privacyStatus"], "thumbnail_set": thumb_ok,
               "publish_at": body["status"].get("publishAt"), "title": body["snippet"]["title"],
               "uploaded_at": datetime.datetime.now(JST).isoformat(timespec="seconds")}
-    json.dump(result, open(os.path.join(a.dir, "youtube.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    json.dump(result, open(os.path.join(a.dir, "youtube_short.json" if a.short else "youtube.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(json.dumps(result, ensure_ascii=False))
 
 if __name__ == "__main__":

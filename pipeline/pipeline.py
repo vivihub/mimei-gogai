@@ -75,6 +75,7 @@ def main():
     thumbnail(script, os.path.join(outdir, f"{name}_thumb.jpg"))
     description(script, script.get("sources", []), os.path.join(outdir, f"{name}_description.txt"))
     shutil.copy(os.path.join(ROOT, "script.json"), os.path.join(outdir, "script.json"))
+    sh([sys.executable, "render_short.py", "--out", os.path.join(outdir, f"{name}_short.mp4")])   # vertical <=60s cut
     dur = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
                           os.path.join(outdir, f"{name}.mp4")], capture_output=True, text=True).stdout.strip()
     print(json.dumps({"outdir": outdir, "mp4": f"{name}.mp4", "duration_s": round(float(dur), 1)}, ensure_ascii=False))

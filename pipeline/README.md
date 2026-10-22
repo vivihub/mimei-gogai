@@ -6,7 +6,7 @@
 ```bash
 bash pipeline/setup.sh                      # 初回のみ（VOICEVOX core 約1.2GBをDL）
 python pipeline/pipeline.py --script pipeline/episodes/hachishaku.json
-# → pipeline/out/<name>/ に MP4・サムネJPG・説明文TXT・script.json
+# → pipeline/out/<name>/ に MP4・ショート版 <name>_short.mp4（縦1080x1920・60秒以内）・サムネJPG・説明文TXT・script.json
 ```
 
 ## 台本フォーマット `episodes/*.json`
@@ -16,7 +16,7 @@ python pipeline/pipeline.py --script pipeline/episodes/hachishaku.json
 - 行に `"chapter": "章タイトル"` を付けると、その行の前に2秒の章カードが入る（10分尺は5〜6章・60〜75行。手本: `episodes/hachishaku_long.json`）
 
 ## 構成
-`tts.py`（VOICEVOX）→ `render.py`（静止フレーム・voice.wav）→ `mix_bgm.py`（bgm/ の normal/ominous/ending を場面切替・ダッキング）→ `render_anim.py`（口パク・まばたき・30fps）→ `pipeline.py`（サムネ・説明文）
+`tts.py`（VOICEVOX）→ `render_short.py`（冒頭〜「先に結論。」でショート版）／ `render.py`（静止フレーム・voice.wav）→ `mix_bgm.py`（bgm/ の normal/ominous/ending を場面切替・ダッキング）→ `render_anim.py`（口パク・まばたき・30fps）→ `pipeline.py`（サムネ・説明文）
 
 ## 声（VOICEVOX）
 ミメイ=雀松朱司(52) / ハス=中部つるぎ ヒソヒソ(96) / ヨミ=小夜SAYO(46)。動画説明文にクレジット必須。
@@ -25,6 +25,8 @@ python pipeline/pipeline.py --script pipeline/episodes/hachishaku.json
 ```bash
 python pipeline/upload_youtube.py --dir pipeline/out/<name>            # youtube.json の既定（public・当日20時JST予約公開）
 python pipeline/upload_youtube.py --dir pipeline/out/<name> --privacy unlisted --publish-at none
+python pipeline/upload_youtube.py --dir pipeline/out/<name> --short        # ショート版（本編URLを説明文に自動挿入）
+python pipeline/upload_youtube.py --dir pipeline/out/<name> --thumb-only   # サムネだけ再設定
 ```
 - 設定は `youtube.json`（privacy / publish_hour_jst / tags / title_format）。マストヘッドとエンドカードのチャンネル名は `render.py` の `CHANNEL`。
 - 認証は `youtube_oauth.json`（refresh token）。初回のみ作る。ブラウザ無し環境なら `python youtube_device_auth.py --client client_secret.json`（OAuth クライアント種別「テレビと制限付き入力デバイス」。URL とコードが出るのでスマホで承認）、手元のPCなら `python youtube_auth_setup.py client_secret.json`（種別「デスクトップ アプリ」）。できたファイルをGoogle Drive の「未明新聞_自動生成動画」フォルダに置く。定期実行はそこから `/home/claude/yt_oauth.json` に取り出して使う。git には入れない（.gitignore 済み）。
