@@ -32,17 +32,26 @@ def thumbnail(script, dst):
     import render as R
     from PIL import Image, ImageDraw
     img = R.background(); d = ImageDraw.Draw(img); R.masthead(d)
-    p = R.portraits["mimei"]
-    p = p.resize((int(p.width * 1.15), int(p.height * 1.15)), Image.LANCZOS)
-    img.paste(p, (R.W - p.width - 120, R.H - p.height + 60), p)
+    # 三人を右側に（ハス・ヨミは奥で小さく暗め、ミメイが手前で大きく）
+    from PIL import ImageEnhance, ImageFilter
+    def put(k, scale, xc, dim=1.0):
+        p = R.portraits[k]
+        p = p.resize((int(p.width * scale), int(p.height * scale)), Image.LANCZOS)
+        if dim < 1.0:
+            p = ImageEnhance.Brightness(p).enhance(dim); p = ImageEnhance.Color(p).enhance(0.6)
+        sh = Image.new("RGBA", p.size, (0, 0, 0, 0)); sh.paste((0, 0, 0, 150), (0, 0), p.split()[3])
+        sh = sh.filter(ImageFilter.GaussianBlur(20))
+        x, y = xc - p.width // 2, R.H - p.height + 40
+        img.paste(sh, (x + 12, y + 24), sh); img.paste(p, (x, y), p)
+    put("hasu", 0.9, 1230, 0.62); put("yomi", 0.95, 1440, 0.75); put("mimei", 1.12, R.W - 270)
     d = ImageDraw.Draw(img)
     d.text((110, 250), script.get("category", "未明ダイブ"), font=R.F(R.SANS, 40), fill=R.SEAL)
     tf = R.F(R.SERIF, 150); y = 320
-    for ln in R.wrap(script["title"], tf, 1150, d)[:2]:
+    for ln in R.wrap(script["title"], tf, 1050, d)[:2]:
         d.text((110, y), ln, font=tf, fill=R.INK); y += 180
     hook = script.get("thumb_text") or script.get("subtitle", "")
-    for ln in R.wrap(hook, R.F(R.SERIF, 54), 1150, d)[:2]:
-        d.text((110, y + 20), ln, font=R.F(R.SERIF, 54), fill=R.ACCENT); y += 72
+    for ln in R.wrap(hook, R.F(R.SERIF, 52), 940, d)[:2]:
+        d.text((110, y + 20), ln, font=R.F(R.SERIF, 52), fill=R.ACCENT); y += 70
     img.convert("RGB").save(dst, quality=92)
 
 def description(script, sources, dst):
