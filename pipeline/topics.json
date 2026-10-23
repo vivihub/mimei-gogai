@@ -1,12 +1,6 @@
 {
   "queue": [
     {
-      "id": "hinamizawa",
-      "title": "ひきこさん",
-      "genre": "都市伝説",
-      "angle": "学校怪談の中で『いじめ』が怪異に変換される仕組み"
-    },
-    {
       "id": "dyatlov",
       "title": "ディアトロフ峠事件",
       "genre": "未解決事件",
@@ -79,6 +73,12 @@
       "title": "くねくね",
       "date": "2026-10-23",
       "note": "全自動（10分33秒・6章・60行・出典6件）本編 https://youtu.be/tZab3nT9Euc ／ ショート https://youtu.be/hqQaf88ujhs（スマホシアター）"
+    },
+    {
+      "id": "hikiko",
+      "title": "ひきこさん",
+      "date": "2026-10-23",
+      "note": "全自動（本編10分11秒・ショート51秒・6章・63行・出典10件）youtube_oauth.json が Drive に無く未投稿（out/mimei_hikiko_20261023 を upload_youtube.py で手動投稿可）"
     }
   ]
 }
