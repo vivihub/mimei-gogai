@@ -1,12 +1,6 @@
 {
   "queue": [
     {
-      "id": "dyatlov",
-      "title": "ディアトロフ峠事件",
-      "genre": "未解決事件",
-      "angle": "1959年ソ連の登山隊9人。2021年の雪崩説で本当に決着したのか"
-    },
-    {
       "id": "kisaragi",
       "title": "きさらぎ駅",
       "genre": "都市伝説",
@@ -79,6 +73,12 @@
       "title": "ひきこさん",
       "date": "2026-10-23",
       "note": "全自動（本編10分11秒・ショート51秒・6章・63行・出典10件）本編 https://youtu.be/QakM0SrXC7M ／ ショート https://youtu.be/F5zWzTKWrzg（2026-10-23 20:00 JST 予約公開。サムネは電話番号確認待ち）"
+    },
+    {
+      "id": "dyatlov",
+      "title": "ディアトロフ峠事件",
+      "date": "2026-10-24",
+      "note": "全自動（本編9分56秒・ショート51秒・6章・58行・出典8件）本編 https://youtu.be/WxbsMxbEJVA ／ ショート https://youtu.be/uwWEXh-JFqk（2026-10-24 20:00 JST 予約公開）"
     }
   ]
 }
