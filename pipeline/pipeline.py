@@ -96,7 +96,8 @@ def main():
     src = os.path.join(os.path.dirname(os.path.abspath(a.script)), "scenes", script.get("id", ""))
     if os.path.isdir(src):
         for fn in os.listdir(src):
-            if fn.lower().endswith((".jpg", ".jpeg", ".png", ".webp")): shutil.copy(os.path.join(src, fn), sdir)
+            if fn.lower().endswith((".jpg", ".jpeg", ".png", ".webp", ".mp4")): shutil.copy(os.path.join(src, fn), sdir)
+        shutil.rmtree(os.path.join(ROOT, "out", "clipframes"), ignore_errors=True)   # 前回のクリップ展開を捨てる
         print("scenes:", sorted(os.listdir(sdir)), flush=True)
     used = {ln.get("scene") for ln in script["lines"] if ln.get("scene")}
     missing = sorted(k for k in used if not any(f.startswith(k + ".") for f in os.listdir(sdir)))

@@ -8,3 +8,4 @@ youtube_oauth.json
 client_secret*.json
 .device.json
 /scenes/
+episodes/scenes/**/*.mp4

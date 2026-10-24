@@ -17,6 +17,7 @@ MAX_S, GAP, END_DUR = 57.0, 0.18, 3.0
 PUNCH_DUR = 1.6          # 冒頭テロップ（thumb_text を画面中央に大きく）を重ねる秒数。スワイプを止めるため
 HOOK_COL = "#FFD35C"
 SR = 24000
+FPS = 30
 
 def pick_lines(script, meta):
     """hook … 先に結論 (inclusive); drop the self-intro line if too long; hard cap MAX_S."""
@@ -31,14 +32,18 @@ def pick_lines(script, meta):
         sel.pop()
     return sel
 
+_BG = None
 def background():
+    global _BG
+    if _BG is not None: return _BG.copy()
     bg = Image.new("RGB", (SW, SH), R.PAPER)
     d = ImageDraw.Draw(bg)
     for y in range(0, SH, 3): d.line([(0, y), (SW, y)], fill="#1D1727")
     glow = Image.new("L", (SW, SH), 0); gd = ImageDraw.Draw(glow)
     gd.ellipse([-200, -400, SW + 200, 900], fill=90)
     glow = glow.filter(ImageFilter.GaussianBlur(140))
-    return Image.composite(Image.new("RGB", (SW, SH), R.PAPER2), bg, glow)
+    _BG = Image.composite(Image.new("RGB", (SW, SH), R.PAPER2), bg, glow)
+    return _BG.copy()
 
 def header(d, script):
     d.line([(50, 70), (SW - 50, 70)], fill=R.INK, width=3)
@@ -56,23 +61,36 @@ def header(d, script):
         d.text((60, y + 6), ln, font=hf, fill=R.ACCENT); y += 50
     return y
 
-def frame(script, active, text, scene=None):
+_SMALL = {}
+def _small(k, s=0.72):
+    if k not in _SMALL:
+        p = R.portraits[k]; _SMALL[k] = p.resize((int(p.width * s), int(p.height * s)), Image.LANCZOS)
+    return _SMALL[k]
+
+_GRADS = {}
+def _grad(area_h):
+    """場面絵の下端を字幕帯へ溶かすグラデーション（高さごとにキャッシュ）。"""
+    if area_h not in _GRADS:
+        col = Image.new("RGBA", (SW, area_h), (15, 11, 23, 0))
+        a = Image.new("L", (1, area_h), 0)
+        for yy in range(area_h - 260, area_h): a.putpixel((0, yy), int(230 * ((yy - (area_h - 260)) / 260) ** 1.3))
+        col.putalpha(a.resize((SW, area_h))); _GRADS[area_h] = col
+    return _GRADS[area_h]
+
+def frame(script, active, text, scene=None, scene_img=None):
     img = background(); d = ImageDraw.Draw(img)
     top = header(d, script)
     band_y = 1420
-    if scene and scene in R.SCENES:
-        # 場面絵を中央領域に（16:9 を縦に切り出し）、話者は右下に小さく
-        area_h = band_y - top - 30; sc = R.SCENES[scene]
-        s = area_h / sc.height; im = sc.resize((int(sc.width * s), area_h), Image.LANCZOS)
-        im = im.crop(((im.width - SW) // 2, 0, (im.width - SW) // 2 + SW, area_h))
+    if scene_img is None and scene and scene in R.SCENES: scene_img = R.SCENES[scene]
+    if scene_img is not None:
+        # 場面絵（またはクリップのフレーム）を中央領域に（16:9 を縦に切り出し）、話者は右下に小さく
+        area_h = band_y - top - 30; sc = scene_img
+        s = area_h / sc.height; cw = int(SW / s)            # 先に中央を切り出してから縮小（毎フレームの縮小コストを1/2以下に）
+        sc = sc.crop(((sc.width - cw) // 2, 0, (sc.width - cw) // 2 + cw, sc.height))
+        im = sc.resize((SW, area_h), Image.BILINEAR if scene_img is not None and sc.width > 1200 else Image.LANCZOS)
         img.paste(im, (0, top + 20))
-        g = Image.new("RGBA", (SW, area_h), (0, 0, 0, 0)); gp = g.load()
-        for yy in range(area_h - 260, area_h):
-            a = int(230 * ((yy - (area_h - 260)) / 260) ** 1.3)
-            for xx in range(SW): gp[xx, yy] = (15, 11, 23, a)
-        img.paste(g, (0, top + 20), g)
-        p = R.portraits[active]; s = 0.72
-        p = p.resize((int(p.width * s), int(p.height * s)), Image.LANCZOS)
+        g = _grad(area_h); img.paste(g, (0, top + 20), g)
+        p = _small(active)
         img.paste(p, (SW - p.width - 40, band_y - p.height + 4), p)
         d = ImageDraw.Draw(img)
     else:
@@ -141,20 +159,12 @@ def main():
     sel = pick_lines(script, meta)
     work = os.path.join(ROOT, "out", "short_frames"); os.makedirs(work, exist_ok=True)
     for f in glob.glob(os.path.join(work, "*")): os.remove(f)
-    segs, chunks = [], []
-    gap = np.zeros(int(GAP * SR), np.int16)
     scenes = R.assign_scenes(script["lines"])
-    for n, i in enumerate(sel):
-        ln = script["lines"][i]
-        fn = f"s_{n:02d}.png"; fr = frame(script, ln["c"], ln["t"], scenes[i]); fr.save(os.path.join(work, fn))
-        dur = meta[i]["dur"] + GAP
-        if n == 0 and dur > PUNCH_DUR + 0.5:   # 最初の行の頭にだけ大テロップを重ねる（音声はそのまま流す）
-            punch(fr.copy(), script).save(os.path.join(work, "s_00p.png"))
-            segs.append(("s_00p.png", PUNCH_DUR)); dur -= PUNCH_DUR
-        segs.append((fn, dur))
+    # 音声
+    chunks = []; gap = np.zeros(int(GAP * SR), np.int16)
+    for i in sel:
         with wave.open(meta[i]["wav"]) as w: chunks.append(np.frombuffer(w.readframes(w.getnframes()), np.int16))
         chunks.append(gap)
-    end_frame(script).save(os.path.join(work, "s_end.png")); segs.append(("s_end.png", END_DUR))
     chunks.append(np.zeros(int(END_DUR * SR), np.int16))
     voice = np.concatenate(chunks).astype(np.float32) / 32768
     mix = voice + load_bgm(len(voice))
@@ -162,15 +172,26 @@ def main():
     wavp = os.path.join(work, "short.wav")
     with wave.open(wavp, "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-    lst = os.path.join(work, "list.txt")
-    with open(lst, "w") as f:
-        for fn, dur in segs: f.write(f"file '{fn}'\nduration {dur:.3f}\n")
-        f.write(f"file '{segs[-1][0]}'\n")
+    # 映像: フレームを ffmpeg にストリーム（場面クリップがあれば毎フレーム差し替え、無ければ静止）
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", lst, "-i", wavp,
-                    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-tune", "stillimage", "-r", "30",
-                    "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", a.out], check=True)
-    total = sum(d for _, d in segs)
+    ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{SW}x{SH}", "-r", str(FPS),
+                           "-i", "-", "-i", wavp, "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
+                           "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", a.out], stdin=subprocess.PIPE)
+    t = 0.0; total = 0.0
+    for n, i in enumerate(sel):
+        ln = script["lines"][i]; sc = scenes[i]
+        dur = meta[i]["dur"] + GAP; nf = int(round(dur * FPS))
+        clip = R.clip_frames(sc) if sc else None
+        still = frame(script, ln["c"], ln["t"], sc)
+        for f in range(nf):
+            tt = t + f / FPS
+            fr = frame(script, ln["c"], ln["t"], sc, R.clip_frame(sc, tt)) if clip else still
+            if n == 0 and tt < PUNCH_DUR and dur > PUNCH_DUR + 0.5: fr = punch(fr.copy(), script)
+            ff.stdin.write(fr.convert("RGB").tobytes())
+        t += nf / FPS; total += dur
+    end = end_frame(script).convert("RGB").tobytes()
+    for _ in range(int(END_DUR * FPS)): ff.stdin.write(end)
+    ff.stdin.close(); ff.wait(); total += END_DUR
     print(json.dumps({"short": a.out, "lines": sel, "duration_s": round(total, 1)}, ensure_ascii=False))
 
 if __name__ == "__main__":

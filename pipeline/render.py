@@ -49,6 +49,30 @@ if os.path.isdir(SCENE_DIR):
                 im = im.crop(((im.width - W) // 2, (im.height - H) // 2, (im.width - W) // 2 + W, (im.height - H) // 2 + H))
             SCENES[k] = im
 KB_ZOOM = 0.07   # Ken Burns: 場面の最初から最後までで 7% ズーム
+
+# ---- 場面クリップ（scenes/<key>.mp4、Runway image-to-video の10秒）。あれば静止画ズームの代わりに使う ----
+CLIP_SLOW = 2        # 半速再生（10秒クリップ → 20秒）、端で折り返すピンポン再生でループの継ぎ目を消す
+CLIP_FPS = 30
+_CLIP_FRAMES = {}    # key -> list of jpg paths
+def clip_frames(key):
+    """クリップを out/clipframes/<key>/ に 1920x1080 30fps の JPEG 連番で展開（初回のみ）。無ければ None。"""
+    if key in _CLIP_FRAMES: return _CLIP_FRAMES[key]
+    mp4 = os.path.join(SCENE_DIR, f"{key}.mp4")
+    if not os.path.exists(mp4): _CLIP_FRAMES[key] = None; return None
+    d = os.path.join(ROOT, "out", "clipframes", key); os.makedirs(d, exist_ok=True)
+    if not os.listdir(d):
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp4, "-vf", f"fps={CLIP_FPS},scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}",
+                        "-q:v", "3", os.path.join(d, "%04d.jpg")], check=True)
+    fr = sorted(os.path.join(d, f) for f in os.listdir(d) if f.endswith(".jpg"))
+    _CLIP_FRAMES[key] = fr if len(fr) > 2 else None
+    return _CLIP_FRAMES[key]
+
+def clip_frame(key, t_rel):
+    """場面開始からの経過秒 t_rel に対応するクリップのフレーム（半速・ピンポン）。"""
+    fr = clip_frames(key); n = len(fr)
+    i = int(t_rel * CLIP_FPS / CLIP_SLOW) % (2 * n - 2)
+    if i >= n: i = 2 * n - 2 - i
+    return Image.open(fr[i]).convert("RGB")
 TELOP_COL = "#FFD35C"
 
 def assign_scenes(lines):
@@ -63,8 +87,10 @@ def assign_scenes(lines):
         out.append(cur)
     return out
 
-def scene_bg(key, progress, idx=0):
-    """場面絵をゆっくりズーム（＋わずかな横ドリフト）。progress 0..1。"""
+def scene_bg(key, progress, idx=0, t_rel=None):
+    """場面の背景。クリップがあればそのフレーム、無ければ場面絵をゆっくりズーム（＋わずかな横ドリフト）。progress 0..1。"""
+    if t_rel is not None and clip_frames(key):
+        return clip_frame(key, t_rel)
     im = SCENES[key]
     z = 1.0 + KB_ZOOM * max(0.0, min(1.0, progress))
     cw, ch = int(W / z), int(H / z)

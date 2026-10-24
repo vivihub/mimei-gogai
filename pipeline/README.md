@@ -34,6 +34,14 @@ python pipeline/pipeline.py --script pipeline/episodes/hachishaku.json
   - スタイル接頭辞: "Dark moody illustration in an anime-adjacent ink-and-wash style, deep purple-black night palette with faint cream and amber highlights, cinematic 16:9, atmospheric. No text, no letters, no readable signs, no faces (silhouettes at most), no gore."
   - 実在の人物・被害者を描かない。場所・物・空気を描く。
 
+## 場面クリップ（Runway image-to-video、2026-10-24〜）
+場面絵をそのまま 10 秒の動画にして、静止画ズームの代わりに背景で動かす（霧・光のゆらぎ・ゆっくりしたカメラ寄り）。
+- `python3 gen_scene_video.py <id>` が `episodes/scenes/<id>/<key>.jpg` → `<key>.mp4`（gen4_turbo・1280x720・10秒）を作る。既にある mp4 はスキップ（`--force` で作り直し）。
+- API キー: 環境変数 `RUNWAYML_API_SECRET`、無ければ `/home/claude/runway_api_key.txt`（Drive「未明新聞_自動生成動画」の `runway_api_key.txt` から取り出す）。キーが無い／失敗した場面は静止画ズームに自動フォールバック。
+- 描画: `render.clip_frame()` が半速（10秒→20秒）・ピンポン再生でループの継ぎ目を消す。ショートも同じクリップを使う（`render_short.py` は毎フレーム描画に変更）。
+- コスト: 5 クレジット/秒（1 クレジット = $0.01）→ 10 秒 1 本 $0.50、6 場面で約 $3/エピソード。
+- mp4 は git に入れない（`.gitignore`）。定期タスクは毎回生成する。
+
 ## 構成
 `tts.py`（VOICEVOX）→ `render_short.py`（冒頭〜「先に結論。」でショート版）／ `render.py`（静止フレーム・voice.wav・場面絵/テロップ）→ `mix_bgm.py`（bgm/ の normal/ominous/ending を場面切替・ダッキング）→ `render_anim.py`（口パク・まばたき・場面絵ズーム・テロップ・30fps）→ `pipeline.py`（サムネ・説明文）／ `save_scenes.py`（場面絵の保存）
 

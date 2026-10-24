@@ -85,7 +85,7 @@ def paste_telop(img, telop_im, pos, i):
 
 def compose_scene(m, overlay, active, states, t_global, talk_env, i):
     prog = (t_global - m["scene_t0"]) / max(0.1, m["scene_t1"] - m["scene_t0"])
-    img = R.scene_bg(m["scene"], prog, m["scene_idx"])
+    img = R.scene_bg(m["scene"], prog, m["scene_idx"], t_rel=t_global - m["scene_t0"])
     img.paste(overlay, (0, 0), overlay)
     if active:
         src = SMALL[active][states[active]]
