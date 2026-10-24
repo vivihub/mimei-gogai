@@ -1,12 +1,6 @@
 {
   "queue": [
     {
-      "id": "kisaragi",
-      "title": "きさらぎ駅",
-      "genre": "都市伝説",
-      "angle": "リアルタイム実況型怪談の元祖。2004年の2ちゃんねるで何が起きたか"
-    },
-    {
       "id": "inunaki",
       "title": "犬鳴村",
       "genre": "心霊・オカルト",
@@ -79,6 +73,12 @@
       "title": "ディアトロフ峠事件",
       "date": "2026-10-24",
       "note": "全自動（本編9分56秒・ショート51秒・6章・58行・出典8件）本編 https://youtu.be/WxbsMxbEJVA ／ ショート https://youtu.be/uwWEXh-JFqk（2026-10-24 20:00 JST 予約公開）"
+    },
+    {
+      "id": "kisaragi",
+      "title": "きさらぎ駅",
+      "date": "2026-10-24",
+      "note": "全自動（本編10分24秒・ショート55秒・6章・58行・出典10件）本編 https://youtu.be/YM1yoWGQsEE ／ ショート https://youtu.be/Lg_1EiJ-_Xk（2026-10-25 20:00 JST 予約公開。ディアトロフ峠が10-24 20:00のため翌日に）"
     }
   ]
 }
