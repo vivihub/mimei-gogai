@@ -39,7 +39,10 @@ def hook_lines(hook, font, width, d):
 def thumbnail(script, dst):
     import render as R
     from PIL import Image, ImageDraw
-    img = R.background(); d = ImageDraw.Draw(img); R.masthead(d)
+    # 背景: 最初の場面絵があればそれを暗くして敷く（CTR対策: 話の情景が見える）
+    first = next((ln.get("scene") for ln in script["lines"] if ln.get("scene")), None)
+    img = R.scene_dim(first, 0.5) if first and first in R.SCENES else R.background()
+    d = ImageDraw.Draw(img); R.masthead(d)
     # 三人を右側に（ハス・ヨミは奥で小さく暗め、ミメイが手前で大きく）
     from PIL import ImageEnhance, ImageFilter
     def put(k, scale, xc, dim=1.0):
@@ -88,6 +91,16 @@ def main():
     name = a.out_name or f"mimei_{script.get('id', 'ep')}_{datetime.date.today():%Y%m%d}"
     if a.script != os.path.join(ROOT, "script.json"):
         shutil.copy(a.script, os.path.join(ROOT, "script.json"))
+    # 場面絵: episodes/scenes/<id>/*.jpg → scenes/ （render.py が読む）。無ければ舞台のみで描く
+    sdir = os.path.join(ROOT, "scenes"); shutil.rmtree(sdir, ignore_errors=True); os.makedirs(sdir)
+    src = os.path.join(os.path.dirname(os.path.abspath(a.script)), "scenes", script.get("id", ""))
+    if os.path.isdir(src):
+        for fn in os.listdir(src):
+            if fn.lower().endswith((".jpg", ".jpeg", ".png", ".webp")): shutil.copy(os.path.join(src, fn), sdir)
+        print("scenes:", sorted(os.listdir(sdir)), flush=True)
+    used = {ln.get("scene") for ln in script["lines"] if ln.get("scene")}
+    missing = sorted(k for k in used if not any(f.startswith(k + ".") for f in os.listdir(sdir)))
+    if missing: print("warn: scene images missing (fallback to studio):", missing, flush=True)
     env = dict(os.environ, LD_LIBRARY_PATH=VVLIB)
     sh([VVPY, "-I", "tts.py"], env=env)
     sh([sys.executable, "render_anim.py"])

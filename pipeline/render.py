@@ -35,6 +35,74 @@ for k in NAMES:
     s = PORTRAIT_H / im.height
     portraits[k] = im.resize((int(im.width * s), PORTRAIT_H), Image.LANCZOS)
 
+# ---- 場面絵（scenes/<key>.jpg 1920x1080）。台本の行に "scene": "<key>" を付けると、その行以降の背景になる ----
+SCENE_DIR = os.path.join(ROOT, "scenes")
+SCENES = {}
+if os.path.isdir(SCENE_DIR):
+    for fn in sorted(os.listdir(SCENE_DIR)):
+        k, ext = os.path.splitext(fn)
+        if ext.lower() in (".jpg", ".jpeg", ".png", ".webp"):
+            im = Image.open(os.path.join(SCENE_DIR, fn)).convert("RGB")
+            if im.size != (W, H):
+                s = max(W / im.width, H / im.height)
+                im = im.resize((int(im.width * s + 0.5), int(im.height * s + 0.5)), Image.LANCZOS)
+                im = im.crop(((im.width - W) // 2, (im.height - H) // 2, (im.width - W) // 2 + W, (im.height - H) // 2 + H))
+            SCENES[k] = im
+KB_ZOOM = 0.07   # Ken Burns: 場面の最初から最後までで 7% ズーム
+TELOP_COL = "#FFD35C"
+
+def assign_scenes(lines):
+    """各行に scene（継続）を解決して返す。"scene": "" で舞台（三人）に戻る。無い画像は無視。"""
+    cur, out = None, []
+    for ln in lines:
+        if "scene" in ln:
+            k = ln["scene"] or None
+            if k and k not in SCENES:
+                print(f"warn: scene image missing: {k}", flush=True); k = cur
+            cur = k
+        out.append(cur)
+    return out
+
+def scene_bg(key, progress, idx=0):
+    """場面絵をゆっくりズーム（＋わずかな横ドリフト）。progress 0..1。"""
+    im = SCENES[key]
+    z = 1.0 + KB_ZOOM * max(0.0, min(1.0, progress))
+    cw, ch = int(W / z), int(H / z)
+    drift = (W - cw) * (0.5 + (0.5 if idx % 2 == 0 else -0.5) * (progress - 0.5))
+    x0 = int(max(0, min(W - cw, drift))); y0 = (H - ch) // 2
+    return im.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.BILINEAR)
+
+def scene_dim(key, amount=0.42):
+    im = ImageEnhance.Brightness(SCENES[key]).enhance(amount)
+    return im.filter(ImageFilter.GaussianBlur(2))
+
+_GRADIENT = None
+def bottom_gradient():
+    """場面絵の下側を字幕帯の色へ溶かす RGBA レイヤー（y=620..880）。"""
+    global _GRADIENT
+    if _GRADIENT is None:
+        g = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        px = g.load()
+        for y in range(600, 880):
+            a = int(235 * ((y - 600) / 280) ** 1.4)
+            for x in range(W): px[x, y] = (15, 11, 23, a)
+        # 上側にもうっすら（マストヘッドの可読性）
+        for y in range(0, 170):
+            a = int(170 * (1 - y / 170) ** 1.2)
+            for x in range(W): px[x, y] = (15, 11, 23, a)
+        _GRADIENT = g
+    return _GRADIENT
+
+def telop_image(text, size=110):
+    """キーワードテロップ（黄色・落ち影）を RGBA で描く。"""
+    f = F(SERIF, size)
+    tmp = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
+    w = int(tmp.textlength(text, font=f)) + 24; h = int(size * 1.35)
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.text((10 + 5, 8 + 5), text, font=f, fill=(0, 0, 0, 230))
+    d.text((10, 8), text, font=f, fill=TELOP_COL)
+    return im
+
 def background():
     bg = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(bg)
@@ -89,7 +157,31 @@ def article_card(d, img):
         d.text((x0 + 34, y), ln, font=sf, fill=INK2); y += 38
     d.text((x0 + 34, y1 - 60), "読むと呪われる？", font=F(SERIF, 24), fill=MUTED)
 
-def frame_for(active, text):
+def subtitle_band(d, active, text):
+    d.rectangle([0, 880, W, H], fill="#0F0B17")
+    d.line([(0, 880), (W, 880)], fill=RULE, width=1)
+    if active:
+        name, role, col = NAMES[active]
+        d.rounded_rectangle([70, 905, 70 + 170, 905 + 54], radius=6, fill=col)
+        d.text((70 + 85, 905 + 27), name, font=F(SERIF, 32), fill="#141018", anchor="mm")
+        d.text((70, 968), role, font=F(SANS, 20), fill=MUTED)
+        tf = F(SERIF, 40)
+        lines = wrap(text, tf, W - 400, d)[:3]
+        y = 900 if len(lines) > 2 else 912
+        for ln in lines:
+            d.text((270, y), ln, font=tf, fill=INK); y += 56
+
+def frame_for(active, text, scene=None, progress=0.5, telop=None):
+    if scene:
+        img = scene_bg(scene, progress); img.paste(bottom_gradient(), (0, 0), bottom_gradient())
+        d = ImageDraw.Draw(img); masthead(d)
+        if active:
+            p = portraits[active]; p = p.resize((int(p.width * 0.6), int(p.height * 0.6)), Image.LANCZOS)
+            img.paste(p, (W - p.width - 90, 880 - p.height), p)
+        d = ImageDraw.Draw(img); subtitle_band(d, active, text)
+        if telop:
+            t = telop_image(telop); img.paste(t, (110, 200), t)
+        return img
     img = background()
     d = ImageDraw.Draw(img)
     masthead(d)
@@ -118,18 +210,9 @@ def frame_for(active, text):
         img.paste(p, (x, y), p)
     # subtitle band
     d = ImageDraw.Draw(img)
-    d.rectangle([0, 880, W, H], fill="#0F0B17")
-    d.line([(0, 880), (W, 880)], fill=RULE, width=1)
-    if active:
-        name, role, col = NAMES[active]
-        d.rounded_rectangle([70, 905, 70 + 170, 905 + 54], radius=6, fill=col)
-        d.text((70 + 85, 905 + 27), name, font=F(SERIF, 32), fill="#141018", anchor="mm")
-        d.text((70, 968), role, font=F(SANS, 20), fill=MUTED)
-        tf = F(SERIF, 40)
-        lines = wrap(text, tf, W - 400, d)[:3]
-        y = 900 if len(lines) > 2 else 912
-        for ln in lines:
-            d.text((270, y), ln, font=tf, fill=INK); y += 56
+    subtitle_band(d, active, text)
+    if telop:
+        t = telop_image(telop, 72); img.paste(t, (1260, 660), t)
     return img
 
 def title_frame():
@@ -167,8 +250,9 @@ def end_frame():
 
 CHAPTER_DUR = 2.0
 
-def chapter_frame(num, text):
-    img = background(); d = ImageDraw.Draw(img); masthead(d)
+def chapter_frame(num, text, scene=None):
+    img = scene_dim(scene) if scene else background()
+    d = ImageDraw.Draw(img); masthead(d)
     d.line([(120, 420), (420, 420)], fill=ACCENT, width=4)
     d.text((120, 300), f"第{num}面", font=F(SANS, 40), fill=ACCENT)
     tf = F(SERIF, 100); y = 450
@@ -177,14 +261,31 @@ def chapter_frame(num, text):
     return img
 
 def timeline():
-    """Shared segment list: (kind, dur, payload). kind = title|chapter|line|end."""
+    """Shared segment list: (kind, dur, payload). kind = title|chapter|line|end.
+    line payload = meta dict に scene / scene_t0 / scene_t1 / scene_idx / telop を足したもの。"""
     segs = [("title", TITLE_DUR, None)]
     n = 0
-    for m, ln in zip(meta, script["lines"]):
+    scenes = assign_scenes(script["lines"])
+    t = TITLE_DUR
+    for m, ln, sc in zip(meta, script["lines"], scenes):
         if ln.get("chapter"):
-            n += 1; segs.append(("chapter", CHAPTER_DUR, (n, ln["chapter"])))
-        segs.append(("line", m["dur"] + GAP, m))
+            n += 1; segs.append(("chapter", CHAPTER_DUR, (n, ln["chapter"], sc))); t += CHAPTER_DUR
+        m = dict(m); m["scene"] = sc; m["telop"] = ln.get("telop"); m["t0"] = t
+        segs.append(("line", m["dur"] + GAP, m)); t += m["dur"] + GAP
     segs.append(("end", END_DUR, None))
+    # 場面ごとの開始・終了時刻（Ken Burns を場面全体で連続させる）
+    spans, cur, idx = {}, None, -1
+    for kind, dur, p in segs:
+        if kind != "line": continue
+        if p["scene"] != cur:
+            cur = p["scene"]; idx += 1
+            if cur: spans[idx] = [p["t0"], p["t0"] + dur]
+        elif cur: spans[idx][1] = p["t0"] + dur
+        p["scene_idx"] = idx
+        p["scene_t0"], p["scene_t1"] = (spans[idx] if cur else (p["t0"], p["t0"] + dur))
+    for kind, dur, p in segs:
+        if kind == "line" and p["scene"]:
+            p["scene_t1"] = spans[p["scene_idx"]][1]
     return segs
 
 def main():
@@ -198,7 +299,8 @@ def main():
         elif kind == "chapter":
             fn = f"f_ch{p[0]:02d}.png"; chapter_frame(*p).save(os.path.join(out, fn)); segs.append((fn, dur, None))
         else:
-            fn = f"f_{p['i']:02d}.png"; frame_for(p["c"], p["t"]).save(os.path.join(out, fn)); segs.append((fn, dur, p["wav"]))
+            prog = (p["t0"] - p["scene_t0"]) / max(0.1, p["scene_t1"] - p["scene_t0"])
+            fn = f"f_{p['i']:02d}.png"; frame_for(p["c"], p["t"], p["scene"], prog, p["telop"]).save(os.path.join(out, fn)); segs.append((fn, dur, p["wav"]))
 
     # audio track: concat with silence padding (VOICEVOX: 24kHz mono 16-bit)
     sr = 24000

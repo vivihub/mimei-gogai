@@ -56,18 +56,34 @@ def header(d, script):
         d.text((60, y + 6), ln, font=hf, fill=R.ACCENT); y += 50
     return y
 
-def frame(script, active, text):
+def frame(script, active, text, scene=None):
     img = background(); d = ImageDraw.Draw(img)
     top = header(d, script)
-    # character: active one, large, centered between header and subtitle band
     band_y = 1420
-    p = R.portraits[active]
-    s = (band_y - top - 40) / p.height
-    p = p.resize((int(p.width * s), int(p.height * s)), Image.LANCZOS)
-    sh = Image.new("RGBA", p.size, (0, 0, 0, 0)); sh.paste((0, 0, 0, 140), (0, 0), p.split()[3])
-    sh = sh.filter(ImageFilter.GaussianBlur(18))
-    x = SW // 2 - p.width // 2; y = band_y - p.height - 10
-    img.paste(sh, (x + 10, y + 22), sh); img.paste(p, (x, y), p)
+    if scene and scene in R.SCENES:
+        # 場面絵を中央領域に（16:9 を縦に切り出し）、話者は右下に小さく
+        area_h = band_y - top - 30; sc = R.SCENES[scene]
+        s = area_h / sc.height; im = sc.resize((int(sc.width * s), area_h), Image.LANCZOS)
+        im = im.crop(((im.width - SW) // 2, 0, (im.width - SW) // 2 + SW, area_h))
+        img.paste(im, (0, top + 20))
+        g = Image.new("RGBA", (SW, area_h), (0, 0, 0, 0)); gp = g.load()
+        for yy in range(area_h - 260, area_h):
+            a = int(230 * ((yy - (area_h - 260)) / 260) ** 1.3)
+            for xx in range(SW): gp[xx, yy] = (15, 11, 23, a)
+        img.paste(g, (0, top + 20), g)
+        p = R.portraits[active]; s = 0.72
+        p = p.resize((int(p.width * s), int(p.height * s)), Image.LANCZOS)
+        img.paste(p, (SW - p.width - 40, band_y - p.height + 4), p)
+        d = ImageDraw.Draw(img)
+    else:
+        # character: active one, large, centered between header and subtitle band
+        p = R.portraits[active]
+        s = (band_y - top - 40) / p.height
+        p = p.resize((int(p.width * s), int(p.height * s)), Image.LANCZOS)
+        sh = Image.new("RGBA", p.size, (0, 0, 0, 0)); sh.paste((0, 0, 0, 140), (0, 0), p.split()[3])
+        sh = sh.filter(ImageFilter.GaussianBlur(18))
+        x = SW // 2 - p.width // 2; y = band_y - p.height - 10
+        img.paste(sh, (x + 10, y + 22), sh); img.paste(p, (x, y), p)
     d = ImageDraw.Draw(img)
     d.rectangle([0, band_y, SW, SH], fill="#0F0B17"); d.line([(0, band_y), (SW, band_y)], fill=R.RULE, width=1)
     name, role, col = R.NAMES[active]
@@ -127,9 +143,10 @@ def main():
     for f in glob.glob(os.path.join(work, "*")): os.remove(f)
     segs, chunks = [], []
     gap = np.zeros(int(GAP * SR), np.int16)
+    scenes = R.assign_scenes(script["lines"])
     for n, i in enumerate(sel):
         ln = script["lines"][i]
-        fn = f"s_{n:02d}.png"; fr = frame(script, ln["c"], ln["t"]); fr.save(os.path.join(work, fn))
+        fn = f"s_{n:02d}.png"; fr = frame(script, ln["c"], ln["t"], scenes[i]); fr.save(os.path.join(work, fn))
         dur = meta[i]["dur"] + GAP
         if n == 0 and dur > PUNCH_DUR + 0.5:   # 最初の行の頭にだけ大テロップを重ねる（音声はそのまま流す）
             punch(fr.copy(), script).save(os.path.join(work, "s_00p.png"))

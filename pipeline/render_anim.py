@@ -29,6 +29,12 @@ def shadow_for(im):
     sh.paste((0, 0, 0, 140), (0, 0), im.split()[3])
     return sh.filter(ImageFilter.GaussianBlur(18))
 SHADOW = {k: shadow_for(d[next(iter(d))]) for k, d in VARIANTS.items()}
+# 場面絵モード用: 話者を小さく（0.6倍）右下に
+SMALL_SCALE = 0.6
+SMALL = {k: {v: im.resize((int(im.width * SMALL_SCALE), int(im.height * SMALL_SCALE)), Image.LANCZOS) for v, im in d.items()}
+         for k, d in VARIANTS.items()}
+SMALL_SHADOW = {k: shadow_for(d[next(iter(d))]) for k, d in SMALL.items()}
+TELOP_POP = 8   # テロップのポップイン フレーム数
 
 def envelope(wav_path, n_frames):
     """RMS per video frame, normalised 0..1."""
@@ -57,17 +63,38 @@ class Blinker:
 def static_base(active, text):
     """Everything except the characters: background, masthead, article, subtitle band."""
     img = R.background(); d = ImageDraw.Draw(img); R.masthead(d); R.article_card(d, img)
-    d.rectangle([0, 880, W, H], fill="#0F0B17"); d.line([(0, 880), (W, 880)], fill=R.RULE, width=1)
+    R.subtitle_band(d, active, text)
+    return img
+
+def scene_overlay(active, text):
+    """場面絵モードの前景（RGBA）: 下グラデーション・マストヘッド・字幕帯。背景は毎フレーム動くので分けて持つ。"""
+    ov = R.bottom_gradient().copy(); d = ImageDraw.Draw(ov)
+    R.masthead(d)
+    R.subtitle_band(d, active, text)
+    return ov
+
+def paste_telop(img, telop_im, pos, i):
+    """ポップイン: 最初の TELOP_POP フレームで 1.25→1.0 倍・透明→不透明。"""
+    if i < TELOP_POP:
+        k = i / TELOP_POP; sc = 1.0 + 0.25 * (1 - k)
+        t = telop_im.resize((int(telop_im.width * sc), int(telop_im.height * sc)), Image.BILINEAR)
+        a = t.split()[3].point(lambda v: int(v * k))
+        img.paste(t, (pos[0] - (t.width - telop_im.width) // 2, pos[1] - (t.height - telop_im.height) // 2), a)
+    else:
+        img.paste(telop_im, pos, telop_im)
+
+def compose_scene(m, overlay, active, states, t_global, talk_env, i):
+    prog = (t_global - m["scene_t0"]) / max(0.1, m["scene_t1"] - m["scene_t0"])
+    img = R.scene_bg(m["scene"], prog, m["scene_idx"])
+    img.paste(overlay, (0, 0), overlay)
     if active:
-        name, role, col = R.NAMES[active]
-        d.rounded_rectangle([70, 905, 70 + 170, 905 + 54], radius=6, fill=col)
-        d.text((70 + 85, 905 + 27), name, font=R.F(R.SERIF, 32), fill="#141018", anchor="mm")
-        d.text((70, 968), role, font=R.F(R.SANS, 20), fill=R.MUTED)
-        tf = R.F(R.SERIF, 40)
-        lines = R.wrap(text, tf, W - 400, d)[:3]
-        y = 900 if len(lines) > 2 else 912
-        for ln in lines:
-            d.text((270, y), ln, font=tf, fill=R.INK); y += 56
+        src = SMALL[active][states[active]]
+        bob = 1.5 * math.sin(2 * math.pi * 0.25 * t_global)
+        if active != "mimei": bob += 4.0 * talk_env * math.sin(2 * math.pi * 3.5 * t_global)
+        x = W - src.width - 90; y = 880 - src.height + int(round(bob))
+        img.paste(SMALL_SHADOW[active], (x + 8, y + 18 - int(round(bob))), SMALL_SHADOW[active])
+        img.paste(src, (x, y), src)
+        band = overlay.crop((0, 880, W, H)); img.paste(band, (0, 880), band)
     return img
 
 def compose(base, active, states, t_global, talk_env, blinkers):
@@ -123,7 +150,10 @@ def main():
             t += dur; continue
         if kind == "end": break
         m = p
-        base = static_base(m["c"], m["t"])
+        scene = m.get("scene")
+        base = scene_overlay(m["c"], m["t"]) if scene else static_base(m["c"], m["t"])
+        telop = R.telop_image(m["telop"], 110 if scene else 72) if m.get("telop") else None
+        telop_pos = (110, 200) if scene else (1260, 660)
         n = int(round(dur * FPS))
         env = envelope(m["wav"], n)
         for i in range(n):
@@ -134,7 +164,10 @@ def main():
                     states[k] = mouth_state(env[i]) if m["c"] == "mimei" else "m0"
                 else:
                     states[k] = blinkers[k].state(tt)
-            emit(compose(base, m["c"], states, tt, float(env[i]), blinkers))
+            if scene: fr = compose_scene(m, base, m["c"], states, tt, float(env[i]), i)
+            else: fr = compose(base, m["c"], states, tt, float(env[i]), blinkers)
+            if telop is not None: paste_telop(fr, telop, telop_pos, i)
+            emit(fr)
         t += n / FPS
         print(f"line {m['i']:02d} done  t={t:.1f}s", flush=True)
     end = R.end_frame().convert("RGB").tobytes()

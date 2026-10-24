@@ -21,8 +21,21 @@ python pipeline/pipeline.py --script pipeline/episodes/hachishaku.json
 - **thumb_text は「問い」**: 16字以内の疑問形か違和感の一文（例「なぜ23時14分に／書けたのか？」）。サムネでは題名より大きく黄色（`THUMB_HOOK`）で主役になり、ショートでは冒頭1.6秒に画面中央の大テロップとして重なる（`render_short.PUNCH_DUR`）。「／」で改行位置を指定（1行8字以内。YouTubeタイトルや見出しでは「／」は自動で除去）。
 - **subtitle は30字以内**: YouTubeタイトルは `【カテゴリ】題名｜subtitle` になるので、結論を短く言い切る。
 
+## 場面絵と動き（2026-10-24〜）
+10分間ほぼ静止だった画面に、台本に合った「場面絵」とテロップを入れる。
+- `episodes/scenes/<id>/<key>.jpg`（1920x1080）を置き、台本の行に `"scene": "<key>"` を付けると、その行以降の背景がその絵になる（ゆっくり7%ズーム＋横ドリフト、話者は右下に小さく表示）。`"scene": ""` で舞台（三人）に戻る。章の最初の行に付けると章カードもその絵になる。画像が無いキーは警告を出して舞台にフォールバック。
+- 行に `"telop": "23時14分"`（10字以内）を付けると、黄色の大テロップがポップインする（場面絵モードは左上110px、舞台モードは右下72px）。日付・数字・固有名詞に、6〜16行に付ける。連続する行には付けない。
+- 台本の `scenes` に key→プロンプト（英語）を記録する。手本: `episodes/kisaragi.json`（hook, ch1〜ch5。まとめ章と結論再掲は舞台）。
+- サムネは最初の場面絵を暗くして背景に敷く。ショートも場面絵を中央に使う。
+- 生成手順（定期タスクが Canva コネクタで実行）:
+  1. 各 scene: `generate-image`（prompt = 下のスタイル接頭辞 + 場面の説明, aspectRatio LANDSCAPE_16_9）→ `get-generate-image-job` で SUCCESS まで待ち、media id を控える
+  2. 場面絵ボード design `DAHY617vOcg` を `read-design`（open_transaction）→ `edit-design` で scene 数ぶん `add_page`(1920x1080, keep_open) → `read-design`（transaction_id, 末尾ページ）で page id → `edit-design` で各ページに `insert_fill`(top0 left0 1920x1080) → `finalize: commit`
+  3. `export-design`（jpg, pages=[追加したページ番号], width 1920, height 1080）→ URL を `python3 save_scenes.py <id> hook=URL ch1=URL ...` で保存
+  - スタイル接頭辞: "Dark moody illustration in an anime-adjacent ink-and-wash style, deep purple-black night palette with faint cream and amber highlights, cinematic 16:9, atmospheric. No text, no letters, no readable signs, no faces (silhouettes at most), no gore."
+  - 実在の人物・被害者を描かない。場所・物・空気を描く。
+
 ## 構成
-`tts.py`（VOICEVOX）→ `render_short.py`（冒頭〜「先に結論。」でショート版）／ `render.py`（静止フレーム・voice.wav）→ `mix_bgm.py`（bgm/ の normal/ominous/ending を場面切替・ダッキング）→ `render_anim.py`（口パク・まばたき・30fps）→ `pipeline.py`（サムネ・説明文）
+`tts.py`（VOICEVOX）→ `render_short.py`（冒頭〜「先に結論。」でショート版）／ `render.py`（静止フレーム・voice.wav・場面絵/テロップ）→ `mix_bgm.py`（bgm/ の normal/ominous/ending を場面切替・ダッキング）→ `render_anim.py`（口パク・まばたき・場面絵ズーム・テロップ・30fps）→ `pipeline.py`（サムネ・説明文）／ `save_scenes.py`（場面絵の保存）
 
 ## 声（VOICEVOX）
 ミメイ=雀松朱司(52) / ハス=中部つるぎ ヒソヒソ(96) / ヨミ=小夜SAYO(46)。動画説明文にクレジット必須。
