@@ -11,6 +11,7 @@ command -v ffmpeg >/dev/null || { echo "ffmpeg missing"; exit 1; }
 fc-list | grep "Noto Serif CJK" >/dev/null || { echo "Noto CJK fonts missing"; exit 1; }
 python3 -c "import PIL, numpy" 2>/dev/null || pip install --break-system-packages -q pillow numpy
 python3 -c "import googleapiclient, google.oauth2" 2>/dev/null || pip install --break-system-packages -q google-api-python-client google-auth  # upload_youtube.py
+python3 -c "import runwayml" 2>/dev/null || pip install --break-system-packages -q runwayml  # gen_scene_video.py
 
 if ! python3 -c "import pyopenjtalk" 2>/dev/null; then
   pip install --break-system-packages -q pyopenjtalk
