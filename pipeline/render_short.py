@@ -14,6 +14,8 @@ import render as R
 ROOT = R.ROOT
 SW, SH = 1080, 1920
 MAX_S, GAP, END_DUR = 57.0, 0.18, 3.0
+PUNCH_DUR = 1.6          # 冒頭テロップ（thumb_text を画面中央に大きく）を重ねる秒数。スワイプを止めるため
+HOOK_COL = "#FFD35C"
 SR = 24000
 
 def pick_lines(script, meta):
@@ -50,7 +52,7 @@ def header(d, script):
     for ln in R.wrap(script["title"], tf, SW - 120, d)[:2]:
         d.text((60, y), ln, font=tf, fill=R.INK); y += 108
     hf = R.F(R.SERIF, 36)
-    for ln in R.wrap(script.get("thumb_text") or script.get("subtitle", ""), hf, SW - 120, d)[:2]:
+    for ln in R.wrap((script.get("thumb_text") or script.get("subtitle", "")).replace("／", ""), hf, SW - 120, d)[:2]:
         d.text((60, y + 6), ln, font=hf, fill=R.ACCENT); y += 50
     return y
 
@@ -74,6 +76,23 @@ def frame(script, active, text):
     tf = R.F(R.SERIF, 44); yy = band_y + 100
     for ln in R.wrap(text, tf, SW - 120, d)[:6]:
         d.text((60, yy), ln, font=tf, fill=R.INK); yy += 62
+    return img
+
+def punch(img, script):
+    """冒頭 PUNCH_DUR 秒だけ、画面中央に「問い」(thumb_text) を大きく重ねる。"""
+    hook = script.get("thumb_text") or script.get("subtitle", "")
+    d = ImageDraw.Draw(img, "RGBA")
+    hf = R.F(R.SERIF, 104)
+    import pipeline as P
+    lines = P.hook_lines(hook, hf, SW - 140, d)
+    lh = int(hf.size * 1.2); h = lh * len(lines) + 90
+    y0 = 760 - h // 2
+    d.rectangle([0, y0, SW, y0 + h], fill=(10, 6, 16, 215))
+    d.line([(0, y0), (SW, y0)], fill=HOOK_COL, width=4); d.line([(0, y0 + h), (SW, y0 + h)], fill=HOOK_COL, width=4)
+    y = y0 + 45
+    for ln in lines:
+        d.text((SW // 2 + 4, y + 4), ln, font=hf, fill="#000000", anchor="ma")
+        d.text((SW // 2, y), ln, font=hf, fill=HOOK_COL, anchor="ma"); y += lh
     return img
 
 def end_frame(script):
@@ -110,8 +129,12 @@ def main():
     gap = np.zeros(int(GAP * SR), np.int16)
     for n, i in enumerate(sel):
         ln = script["lines"][i]
-        fn = f"s_{n:02d}.png"; frame(script, ln["c"], ln["t"]).save(os.path.join(work, fn))
-        segs.append((fn, meta[i]["dur"] + GAP))
+        fn = f"s_{n:02d}.png"; fr = frame(script, ln["c"], ln["t"]); fr.save(os.path.join(work, fn))
+        dur = meta[i]["dur"] + GAP
+        if n == 0 and dur > PUNCH_DUR + 0.5:   # 最初の行の頭にだけ大テロップを重ねる（音声はそのまま流す）
+            punch(fr.copy(), script).save(os.path.join(work, "s_00p.png"))
+            segs.append(("s_00p.png", PUNCH_DUR)); dur -= PUNCH_DUR
+        segs.append((fn, dur))
         with wave.open(meta[i]["wav"]) as w: chunks.append(np.frombuffer(w.readframes(w.getnframes()), np.int16))
         chunks.append(gap)
     end_frame(script).save(os.path.join(work, "s_end.png")); segs.append(("s_end.png", END_DUR))

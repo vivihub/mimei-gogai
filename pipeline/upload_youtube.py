@@ -30,7 +30,7 @@ def build_meta(outdir, cfg, privacy, publish_at, short=False):
     description = open(desc_path, encoding="utf-8").read() if os.path.exists(desc_path) else script.get("summary", "")
     mx = cfg.get("title_max", 100)
     if short:
-        hook = script.get("thumb_text") or script.get("subtitle", "")
+        hook = (script.get("thumb_text") or script.get("subtitle", "")).replace("／", "")   # ／ はサムネ用の改行指定
         title = f"{script['title']}｜{hook} #Shorts"
         if len(title) > mx: title = f"{script['title']} #Shorts"[:mx]
         rec = os.path.join(outdir, "youtube.json")

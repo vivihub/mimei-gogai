@@ -11,6 +11,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 VVPY = "/home/claude/vv/vvenv/bin/python"
 VVLIB = "/home/claude/vv/voicevox_core-linux-x64-cpu-0.15.7"
 CREDIT = "VOICEVOX:雀松朱司／中部つるぎ／小夜SAYO"
+THUMB_HOOK = "#FFD35C"   # サムネ・ショート冒頭テロップの「問い」の色（紫背景に対して最も目立つ暖色）
 
 def sh(cmd, **kw):
     print("$", " ".join(cmd), flush=True)
@@ -27,6 +28,13 @@ def validate(script):
         share[ln["c"]] = share.get(ln["c"], 0) + len(ln["t"])
     tot = sum(share.values())
     print("speaker share:", {k: f"{v / tot:.0%}" for k, v in share.items()})
+
+def hook_lines(hook, font, width, d):
+    """thumb_text を最大2行に。「／」か改行があればそこで折る（語の途中で折れるのを避ける）。"""
+    import render as R
+    if "／" in hook or "\n" in hook:
+        return [x.strip() for x in hook.replace("\n", "／").split("／") if x.strip()][:2]
+    return R.wrap(hook, font, width, d)[:2]
 
 def thumbnail(script, dst):
     import render as R
@@ -45,13 +53,17 @@ def thumbnail(script, dst):
         img.paste(sh, (x + 12, y + 24), sh); img.paste(p, (x, y), p)
     put("hasu", 0.9, 1230, 0.62); put("yomi", 0.95, 1440, 0.75); put("mimei", 1.12, R.W - 270)
     d = ImageDraw.Draw(img)
-    d.text((110, 250), script.get("category", "未明ダイブ"), font=R.F(R.SANS, 40), fill=R.SEAL)
-    tf = R.F(R.SERIF, 150); y = 320
-    for ln in R.wrap(script["title"], tf, 1050, d)[:2]:
-        d.text((110, y), ln, font=tf, fill=R.INK); y += 180
+    # CTR対策: 「問い」(thumb_text) を最大サイズ・高コントラスト色で主役に、題名は上に小さく添える
+    d.text((110, 230), script.get("category", "未明ダイブ"), font=R.F(R.SANS, 36), fill=R.SEAL)
+    tf = R.F(R.SERIF, 84); y = 290
+    for ln in R.wrap(script["title"], tf, 1000, d)[:1]:
+        d.text((110, y), ln, font=tf, fill=R.INK); y += 120
     hook = script.get("thumb_text") or script.get("subtitle", "")
-    for ln in R.wrap(hook, R.F(R.SERIF, 52), 940, d)[:2]:
-        d.text((110, y + 20), ln, font=R.F(R.SERIF, 52), fill=R.ACCENT); y += 70
+    hf = R.F(R.SERIF, 100); y += 30
+    lines = hook_lines(hook, hf, 880, d)
+    for ln in lines:
+        d.text((114, y + 4), ln, font=hf, fill="#000000")       # 落ち影
+        d.text((110, y), ln, font=hf, fill=THUMB_HOOK); y += int(hf.size * 1.18)
     img.convert("RGB").save(dst, quality=92)
 
 def description(script, sources, dst):

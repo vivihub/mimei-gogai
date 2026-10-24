@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageEnhance, ImageFilter
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 W, H = 1920, 1080
-GAP, TITLE_DUR, END_DUR = 0.18, 2.4, 3.2
+GAP, TITLE_DUR, END_DUR = 0.18, 1.5, 3.2   # 冒頭タイトルカードは1.5秒（離脱対策で短く）
 
 SERIF = "/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc"
 SANS = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
