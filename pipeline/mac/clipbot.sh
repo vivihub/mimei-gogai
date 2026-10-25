@@ -14,12 +14,13 @@ LOG="$HOME/github/mimei-clipbot.log"
 CODEX_TIMEOUT=2400   # 秒（40分）
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$HOME/.nvm/versions/node/$(ls "$HOME/.nvm/versions/node" 2>/dev/null | tail -1)/bin:$PATH"
 
-log() { printf '%s %s\n' "$(date '+%F %T')" "$*" >> "$LOG"; }
+log() { printf '%s %s\n' "$(date '+%F %T')" "$*" | tee -a "$LOG"; }
 mkdir -p "$(dirname "$LOG")"
+log "run start (pid $$, HOME=$HOME, script=$0)"
 
 # 多重起動防止（ロックが古すぎる＝前回クラッシュなら無視）
 if [ -d "$LOCK" ]; then
-  if [ -n "$(find "$LOCK" -mmin +90 2>/dev/null)" ]; then rm -rf "$LOCK"; else exit 0; fi
+  if [ -n "$(find "$LOCK" -mmin +90 2>/dev/null)" ]; then rm -rf "$LOCK"; else log "another run holds the lock; skip"; exit 0; fi
 fi
 mkdir "$LOCK" || exit 0
 trap 'rm -rf "$LOCK"' EXIT
@@ -46,7 +47,7 @@ git fetch -q origin clips 2>>"$LOG" && git reset -q --hard origin/clips 2>>"$LOG
 for d in "$REPO"/pipeline/episodes/scenes/*/; do
   id="$(basename "$d")"
   [ -f "$d/WANT_CLIPS" ] || continue
-  [ -f "$CLIPS_WT/clips/$id/DONE" ] && continue
+  [ -f "$CLIPS_WT/clips/$id/DONE" ] && { log "$id: already DONE, skip"; continue; }
   njpg=$(ls "$d"/*.jpg 2>/dev/null | wc -l | tr -d ' ')
   [ "$njpg" -ge 1 ] || { log "$id: no jpg yet"; continue; }
   log "$id: start ($njpg jpg)"
