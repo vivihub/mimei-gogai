@@ -1,0 +1,330 @@
+{
+  "id": "kokkuri",
+  "title": "こっくりさん",
+  "subtitle": "動かすのは霊じゃない。指を置いた全員",
+  "thumb_text": "10円玉を／動かすのは誰？",
+  "category": "未明ダイブ",
+  "summary": "紙に鳥居と五十音、10円玉に指を置いて「こっくりさん、おいでください」。学校の怪談の定番は、1884年に伊豆・下田へ来た欧米の「テーブル・ターニング」が、ご飯のおひつと竹で日本式に作り替えられたものでした。1853年のロンドンでファラデーが、1887年の東京で井上円了が出した同じ答え「無意識の筋肉の動き」と、1973年『うしろの百太郎』で再点火した昭和のブーム、学校での禁止令まで、新聞記事と研究で分解します。",
+  "sources": [
+    "吉岡一志「こっくりさんは誰のものだったのか：19世紀末の流行時を中心に」山口県立大学学術情報 第19号 2026-03 https://ypir.lib.yamaguchi-u.ac.jp/yp/1898/files/169318",
+    "YOKAI.JP「こっくりさん」 https://yokai.jp/en/yokai/kokkuri-san",
+    "Wikipedia (en)「Kokkuri」 https://en.wikipedia.org/wiki/Kokkuri",
+    "ニコ・トスカーニ「【都市伝説】最も有名な「学校の怪談」トイレの花子さん、こっくりさん、口裂け女……そのルーツを紐解く」Real Sound 2024-05-26 https://realsound.jp/book/2024/05/post-1670048.html",
+    "伊藤和弘「「こっくりさん」が大流行…! 少年たちの世界観を変えた『うしろの百太郎』」週刊現代 2022-09-26 https://gendai.media/articles/-/100065",
+    "週刊女性編集部「こっくりさん」特集 週刊女性 2023-10-10号 https://www.jprime.jp/articles/-/29404",
+    "川勝康弘「コックリさんの起源」ナゾロジー 2022-10-31 https://nazology.kusuguru.co.jp/archives/116968/4",
+    "Psi Encyclopedia (SPR)「Table Turning」 https://psi-encyclopedia.spr.ac.uk/articles/table-turning",
+    "Wikipedia (en)「Table-turning」 https://en.wikipedia.org/wiki/Table-turning",
+    "The Ghost In My Machine「The Most Dangerous Games: Kokkuri-san」2019-02-20 https://theghostinmymachine.com/2019/02/20/the-most-dangerous-games-kokkuri-san-or-the-spirit-of-the-coin-japan/",
+    "二見書房 プレスリリース「『狐狗狸さんの秘密』50年ぶりの復刻」2025-08-01 https://animeanime.jp/release/prtimes/20250801/241633.html"
+  ],
+  "scenes": {
+    "hook": "An empty Japanese school classroom after sunset, desks pushed together, a sheet of paper on a desk with a small red gate shape and a grid of blank squares, a single coin on it, orange-purple light through the windows, long shadows, no people. No readable text.",
+    "ch1": "A dim Meiji-era Japanese tatami room at night, a wooden rice tub balanced upside-down on three bamboo sticks like a tripod, a paper lantern, sliding paper doors, a harbor with a Western sailing ship faintly visible through the open window. No people, no text.",
+    "ch2": "A late-19th-century Japanese newspaper printing room at night, stacks of newsprint, a woodblock print press, ink brushes, a scholar's desk with a brass lamp and thick books, a fox mask hanging on the wall. No readable text.",
+    "ch3": "A Victorian London parlour in 1853 at night, a round wooden table with a cloth, several chairs pulled close, a brass scientific apparatus with rollers and a thin pointer on the table, gaslight, heavy curtains, mist outside the window. No people, no text.",
+    "ch4": "Extreme close-up of a worn ten-yen-like copper coin on a sheet of paper, several fingertips in silhouette resting on it, the coin mid-slide leaving a faint blur, dramatic single light from above, deep shadows. No faces, no text.",
+    "ch5": "A 1970s Japanese boy's room at night, a stack of weekly manga magazines, a transistor radio glowing, a small TV with static, a school bag, a crumpled sheet of paper and a coin on the tatami floor, warm lamp light. No people, no readable text."
+  },
+  "lines": [
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "scene": "hook",
+      "telop": "放課後の教室",
+      "t": "放課後の教室。紙の上の10円玉が、動く。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "t": "誰も押していない。「こっくりさん、こっくりさん、おいでください」。指を離したら、帰れなくなる。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……離しちゃ……だめ……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "動かすのは全員",
+      "t": "先に結論。10円玉を動かしているのは、指を置いた全員です。狐でも霊でもなく、本人が気づかない筋肉の動き。1853年のロンドンと、1887年の東京で、同じ答えがすでに出ています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "scene": "",
+      "t": "未明新聞のミメイです。今日は「こっくりさん」を部品ごとに分解します。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "遊びの中身と、明治の始まり",
+      "scene": "ch1",
+      "telop": "1884年 下田",
+      "t": "第一面。出来事の詳細です。こっくりさんの始まりは、明治時代。哲学者の井上円了が書き残した話では、1884年、伊豆の下田沖で難破したアメリカ船の乗組員が、暇つぶしに「テーブル・ターニング」をやって見せた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "テーブルに手を置いて霊を呼び、傾きで答えを読む、欧米で流行していた降霊術です。ところが当時の日本の家にはテーブルが無い。そこで代わりに使われたのが、ご飯のおひつと、竹の棒三本でした。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "おひつ……？それで、こっくりさん？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "おひつと竹三本",
+      "t": "竹を三本組んで、その上におひつを乗せ、布をかけて、三人で手を置く。不安定だから、こっくり、こっくりと傾く。この音が名前になった、というのが円了の説明です。狐狗狸という漢字は、あとから音に当てたもの。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "ここが大事です。狐、狗、狸。この三文字を当てた瞬間に、ただの傾く道具が「動物の霊が憑く遊び」に変わった。日本には狐憑きの信仰がもともとある。名前が、遊びの意味を書き換えたわけです。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "今の形は紙と10円玉。上に鳥居、左右に「はい」「いいえ」、下に五十音と数字。指を置いて「おいでください」と唱え、終わったら「お帰りください」。紙は破って捨て、10円玉は使ってしまう。地域で細部は変わります。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……名前を……つけたのは……人……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "新聞に残る、1886年の流行",
+      "scene": "ch2",
+      "telop": "1886年6月3日",
+      "t": "第二面。初出と広まり方です。山口県立大学の吉岡一志さんが、明治の新聞と雑誌を調べ直しています。見つかった最古の記事は1886年6月3日の大阪朝日新聞、題は「狐狗狸さんの祟り」。もう「祟り」です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "翌1887年がピークで、新聞・雑誌の記事は年に44件。夫の浮気を占う主婦、夜中までやって巡査に説諭される人、結婚や盗難を占う例。子ども向けの錦絵「幼童流行こッくり踊り」まで出た。都市の大人の遊びだったんです。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "子どもの遊びじゃなかったんですね。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "最初は違った。吉岡さんは、1930年代ごろに子どもの遊びへ移っていった可能性を指摘しています。そして1887年、ここで登場するのが井上円了です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "井上円了『妖怪玄談』",
+      "t": "円了は東洋大学を作った哲学者で、「妖怪博士」と呼ばれた人。迷信をなくすために妖怪を研究した。1887年の『妖怪玄談』で、こっくりさんを取り上げ、動かしているのは手を置いた本人たちの無意識の筋肉の動きだと説明した。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "吉岡さんによれば、その後の学者が百年かけて出した「科学的な説明」は、ほぼ全部この1887年の説明をなぞっている。つまり答えは、流行のピークと同じ年に出ていた。それでも遊びは消えなかった。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "もう一つ。1886年ごろ、こっくりさんの印刷物が官憲に発売禁止にされた、という回顧も残っている。明治の時点ですでに「禁止される遊び」だった。これは後でまた出てきます。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……答えが……出ても……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "古い部品：ロンドンの机と、狐憑き",
+      "scene": "ch3",
+      "telop": "1853年 ロンドン",
+      "t": "第三面。古い部品を探します。まず西の部品。テーブル・ターニングは、アメリカで始まった心霊主義の流行が、1852年から53年の冬にヨーロッパへ渡ったもの。1853年のイギリスでは、お茶とテーブル・ターニングのパーティーが大流行した。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "机に手を置いて輪になる。机が傾き、回り、脚が床を叩いて質問に答える。誰も押していないのに動く。これが当時の人々の体験でした。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "ファラデーの実験",
+      "t": "そこで動いたのが物理学者マイケル・ファラデー。1853年6月、二枚の板の間にガラスのローラーを挟み、指先の力が机より先に動くかを測る装置を作った。結果、机を動かしていたのは参加者の手で、しかも本人は押した自覚が無かった。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "じゃあ日本に来る前に、もう種明かしされてた……？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "そうです。種明かしと遊びが、セットで輸入された。円了の説明も、このファラデーの線上にある。それでも遊びのほうが残り、種明かしのほうが忘れられた。この非対称が、こっくりさんの一つ目の謎です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "狐憑き",
+      "t": "次に東の部品。日本には狐憑き、犬神、狸の化かしという「憑きもの」の信仰が古くからある。狐狗狸の三文字は、この体系にテーブル・ターニングを接続する配線だった。研究者はこれを、憑物信仰に取り込まれた瞬間と呼んでいます。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "西洋では「死者の霊」を呼ぶ交霊術。日本では「正体不明の何か」を呼ぶ遊び。同じ机が、海を渡って別のものを呼ぶようになった。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……呼ばれたのは……どっち……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "決め手：指を離してはいけない",
+      "scene": "ch4",
+      "telop": "観念運動",
+      "t": "第四面。決め手となる記号です。心理学ではこれを観念運動、イデオモーター効果と呼びます。「動くかもしれない」と思うだけで、筋肉がごくわずかに動く。複数の指が乗っていれば、力は合算され、誰の力でもない動きになる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "だから10円玉は、本当に「誰も押していない」のに動く。嘘をついている人はいない。ここが、こっくりさんが百年以上生き残った最大の理由です。全員が正直で、全員が動かしている。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "ファラデーの装置は、この合算をあばいた。円了も同じ答え。170年前と140年前、二度出た結論です。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "でも、怖いのはルールのほうですよね。指を離すな、とか。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "指を離すな",
+      "t": "いい指摘です。指を離してはいけない。お帰りくださいと言って、10円玉が鳥居に戻るまで終われない。守れなければ憑かれる。このルールは、遊びを「失敗できる儀式」に変える。失敗の可能性があるから、怖い。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "そして集団でやる。ルールが守れるかどうか、全員が互いを見ている。緊張で呼吸が速くなり、手が震え、10円玉がさらに動く。それを見てまた緊張する。この循環が、教室で起きていたことです。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1976年の症例報告",
+      "t": "1976年には、児童生徒に流行したこっくりさん遊びについて医学・心理学の症例報告が出ています。過呼吸やトランス状態、集団ヒステリーと記録された。多くは中学生の事例とされる。霊ではなく、緊張と呼吸の問題として扱われた。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……息が……速く……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "その後：1973年、少年マガジンの再点火",
+      "scene": "ch5",
+      "telop": "うしろの百太郎",
+      "t": "第五面。その後です。明治の遊びが、昭和の学校で爆発する。きっかけは1973年、つのだじろうが週刊少年マガジンで始めた『うしろの百太郎』。守護霊に守られた中学生が心霊現象を「科学的に」説明する漫画で、こっくりさんも登場した。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "翌1974年には中岡俊哉の『狐狗狸さんの秘密』が二見書房から出て、文字盤の付録付きで大ヒット。オイルショックの不安の中、ノストラダムス、ユリ・ゲラー、エクソシスト。オカルトブームの真ん中に、こっくりさんが座った。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "それで学校が禁止した、と。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "禁止令",
+      "t": "1970年代後半から80年代にかけて、多くの学校や教育委員会が禁止を出したとされる。入院した子がいた、という証言も雑誌のアンケートに残っている。明治に官憲が印刷物を禁じた話と、形がそっくりです。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "禁止は、遊びに「やってはいけない」という値札を付ける。やってはいけない遊びほど、放課後の教室で生き残る。2010年代にはアニメや、スマホのアプリ版も現れた。道具が変わっても、ルールの骨は明治のままです。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "『狐狗狸さんの秘密』は2025年に50年ぶりに復刻された。文字盤はカバーの裏に印刷されている。つまり今も、売れると見込まれている。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "海も渡った。台湾でも花子さんと並ぶ定番の学校の怪談になっている、という研究があります。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……禁止は……誘い……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "まとめ：一般化できる条件",
+      "scene": "",
+      "telop": "三つの条件",
+      "t": "第六面。こっくりさんから取り出せる条件を三つ。一つ、全員が正直であること。誰も嘘をついていないのに動く。だから種明かしを聞いても、体験のほうが勝つ。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "二つ、失敗できる儀式であること。指を離すな、帰すまで終われない。守れなければ罰がある。ルールが怖さの装置で、霊はその口実にすぎない。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "三つ、禁止されること。明治の官憲も、昭和の学校も、禁じることで遊びに価値を与えた。禁止は、怪談のいちばん安定したスポンサーです。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "結局、10円玉を動かしてたのは、誰なんでしょう。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "指を置いた全員。そして、動いてほしいと思った全員です。1853年のファラデーも、1887年の円了も、そう言った。百四十年たって、答えは変わっていない。変わらないのは、遊ぶ側のほうです。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "今日の結論。10円玉を動かすのは霊ではなく、指を置いた全員。下田に来た西洋の机が、おひつと竹に変わり、狐狗狸の三文字で憑きものに接続された。答えは流行と同じ年に出ていて、それでも遊びは残った。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "正直な全員と、失敗できる儀式と、禁止。この三つがそろう限り、放課後の10円玉は動き続ける。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "次回は「月の裏側の都市伝説」。「月の裏に基地がある」という話はどこから来たのか。実際の探査で分かっていることと並べて分解します。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "ending",
+      "t": "……選ばれたのは、あなたです。チャンネル登録、お願いします。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ending",
+      "t": "……まだ……指……離してない……"
+    }
+  ]
+}
