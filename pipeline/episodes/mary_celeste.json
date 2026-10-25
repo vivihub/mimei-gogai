@@ -1,0 +1,331 @@
+{
+  "id": "mary_celeste",
+  "title": "メアリー・セレスト号",
+  "subtitle": "食事は温かくなかった。船は無事、消えたのは人だけ",
+  "thumb_text": "温かい食事は／誰が書いた？",
+  "category": "未明ダイブ",
+  "summary": "1872年12月、大西洋で見つかった無人の帆船メアリー・セレスト号。「食卓には温かい食事が残っていた」は本当か。記録に残るのは、無くなった救命ボート、放り出された測深棒、ジェノヴァで見つかった九つの空の樽。1884年にコナン・ドイルが匿名で書いた短編が足した部品と、2000年代の化学実験・海洋調査が示した「自分の意思で船を降りた」説まで、裁判記録と年表で分解します。",
+  "sources": [
+    "Wikipedia (en)「Mary Celeste」 https://en.wikipedia.org/wiki/Mary_Celeste",
+    "Jess Blumberg「Abandoned Ship: The Mary Celeste」Smithsonian Magazine 2007-11 https://www.smithsonianmag.com/history/abandoned-ship-the-mary-celeste-174488104/",
+    "Eli Wizevich「An Abandoned Merchant Ship Was Discovered Floating in the Atlantic in 1872…」Smithsonian Magazine 2024-12-04 https://www.smithsonianmag.com/smart-news/an-abandoned-merchant-ship-was-discovered-floating-in-the-atlantic-1872-the-mystery-its-missing-crew-never-solved-180985547/",
+    "Brian Dunning「The Mystery of the Mary Celeste」Skeptoid #289 https://skeptoid.com/episodes/289",
+    "Cecil Adams「What really happened to the Mary Celeste?」The Straight Dope https://www.straightdope.com/21343104/what-really-happened-to-the-em-mary-celeste-em",
+    "Thomas Jones「The Mary Celeste: 'A curiosity that has never been satisfied'」History Today https://www.historytoday.com/mary-celeste-curiosity-has-never-been-satisfied",
+    "American Heritage「The Mystery of the Mary Celeste」 https://www.americanheritage.com/mystery-mary-celeste",
+    "Murder & Mayhem「Sir Arthur Conan Doyle and the Mystery of the Mary Celeste」 https://murder-mayhem.com/sir-arthur-conan-doyle-the-mary-celeste",
+    "Sarah Pruitt「What Happened to the Mary Celeste?」HISTORY 2015-07-21（2025-05-27更新） https://www.history.com/articles/what-happened-to-the-mary-celeste",
+    "maryceleste.net「The Wreck」 https://www.maryceleste.net/wreck.htm",
+    "サードペディア百科事典「メアリー・セレスト」 https://pedia.3rd-in.co.jp/wiki/メアリー・セレスト"
+  ],
+  "scenes": {
+    "hook": "A two-masted 19th-century sailing brigantine adrift alone on a vast grey Atlantic at dusk, sails partly set and torn, no one on deck, low swell, mist on the horizon, a single pale light in the cabin window.",
+    "ch1": "The dim wooden cabin of an 1870s merchant ship at night, a small table with an open logbook and a brass lamp swinging, a child's wooden toy on the floor, water pooling on the planks, a hatch open to the dark deck above. No readable text.",
+    "ch2": "A stone colonial courtroom in Gibraltar at night, tall shuttered windows, a heavy wooden bench, piles of documents and a sheathed naval sword laid on green cloth, a single oil lamp, a harbour with masts visible beyond the window.",
+    "ch3": "A phantom sailing ship seen far off through fog and lightning on a stormy night sea, its silhouette glowing faintly, tattered sails, no crew, towering waves, an old-fashioned engraving-like mood.",
+    "ch4": "The dark cargo hold of a wooden ship, hundreds of wooden barrels stacked in rows, nine barrels in the foreground slightly different in colour and seeping, a faint shimmering haze of vapour in the air, a thin shaft of light from an open hatch above.",
+    "ch5": "A wrecked wooden sailing ship stranded on a coral reef in shallow turquoise Caribbean water at dawn, hull broken, masts leaning, distant green island, gulls, calm and sad atmosphere."
+  },
+  "lines": [
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "scene": "hook",
+      "telop": "1872年12月4日",
+      "t": "大西洋。帆を張ったまま、誰もいない船。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "t": "食卓には温かい食事。コップには飲みかけのコーヒー。船は、そのまま港まで走ったという。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……誰が……食べるの……？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "食事は無かった",
+      "t": "先に結論。温かい食事は無かった。書いたのは小説家です。本物の船は無事で、消えたのは十人と救命ボート一艇だけ。十人は自分の意思で船を降りた、これが最も有力な見方です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "scene": "",
+      "t": "未明新聞のミメイです。今日は「メアリー・セレスト号」を部品ごとに分解します。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "1872年、無人船の発見",
+      "scene": "ch1",
+      "telop": "1872年11月7日",
+      "t": "第一面。出来事の詳細です。1872年11月7日、二本マストの帆船メアリー・セレスト号がニューヨークを出港。行き先はイタリアのジェノヴァ。積荷は工業用アルコール、1701樽。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "乗っていたのは十人。船長のベンジャミン・ブリッグズ、妻のサラ、二歳の娘ソフィア、そして七人の乗組員。ブリッグズは船の共同所有者でもあり、評判のいい堅実な船長だったと記録されています。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "無人で見つかったのは、いつですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "約一か月後の12月4日。ニューヨークを八日遅れで出たカナダの帆船デイ・グラツィア号が、アゾレス諸島とポルトガルの中間あたりで、ふらふらと進む船を見つけます。船長はデイヴィッド・モアハウス。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "一等航海士のオリバー・デヴォーが乗り込むと、誰もいない。帆は一部が破れ、前の船倉のハッチが開いている。船内には約1メートルの水。ただし、この大きさの船なら沈む量ではなかった。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "日誌は11月25日",
+      "t": "無くなっていたのは、唯一の救命ボート、六分儀、クロノメーター、船の書類。残っていたのは航海日誌、六か月分の食料と水、乗組員の私物。日誌の最後は11月25日、アゾレス諸島のサンタマリア島の近くでした。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "つまり発見まで、九日から十日のあいだ、船は誰も乗せずに走り続けていた。これが記録に残る「出来事」のすべてです。食卓の話は、どこにも出てきません。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……十日……誰が……舵を……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "ジブラルタルの審判と、小説家",
+      "scene": "ch2",
+      "telop": "ジブラルタル",
+      "t": "第二面。初出と広まり方です。デイ・グラツィア号は船をジブラルタルまで運び、海事裁判所に救助の報奨を申し立てた。ここで登場するのが検事総長フレデリック・ソリー＝フラッド。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "彼は事件性を疑った。船長の寝台の下にあった刀の赤い染みは血ではないか。乗組員がアルコールで酔って船長一家を殺したのではないか。しかし鑑定の結果、染みは血ではなく錆。樽は一つも開けられていなかった。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "じゃあ、疑いは晴れたんですね。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "法的には。1873年、船は解放され、救助した側には1700ポンド、船と積荷の評価額の約五分の一が支払われた。相場より低い。裁判所も、どこかで釈然としないままだったと見られています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1884年1月",
+      "t": "そして本題。1884年1月、イギリスの『コーンヒル・マガジン』に匿名の短編が載る。題は「J・ハバクク・ジェフソンの証言」。生き残りの証言という形で、船名は「マリー・セレスト」と一字違い。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "この小説が足したものを数えます。食卓に残る食事、火にかかったままのお茶、無事なままの救命ボート、無人で港に入る船。どれも記録と正反対です。作者は当時二十四歳の無名の医師、アーサー・コナン・ドイル。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "コナン・ドイル",
+      "t": "アメリカの新聞が事実として転載し、ソリー＝フラッドは「最初から最後まで捏造」と怒り、ジブラルタルのアメリカ領事も抗議した。事実の否定が、かえって話を有名にしてしまった。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……否定が……宣伝に……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "幽霊船という古い型",
+      "scene": "ch3",
+      "telop": "幽霊船",
+      "t": "第三面。古い部品を探します。乗り手のいない船が海をさまよう。これは「幽霊船」の型で、ヨーロッパには「さまよえるオランダ人」の伝説が、十八世紀の終わりには活字になっている。嵐の中、永遠に港に入れない船です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "メアリー・セレスト号はこの型に、本物の船名と本物の日付を与えた。幽霊船の伝説に「実話」の裏打ちが付いた瞬間です。だから後の作家たちは、この船名を枕にして何でも書けた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "幽霊船の話は普通、見た人の証言だけで終わる。ところがこの船は港まで運ばれ、裁判で調べられた。「調べたのに分からない」。これが型を一段、怖くした。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "後から足された話、ほかにもあるんですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1913年の偽証言",
+      "t": "あります。1913年、『ストランド・マガジン』に「アベル・フォスダイク」という密航者の手記が載る。水泳競争の見物台が崩れて全員が海に落ちた、という内容。これは創作と見られています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "1920年代には、生存者「ペンバートン」の証言を名乗る本も出た。著者キーティングが自分の父親の写真を生存者として示し、後に捏造が露見した。実在の船名は、偽の証言を次々と引き寄せたわけです。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "ベラ・ルゴシ",
+      "t": "1935年にはイギリスで映画『メアリー・セレスト号の謎』。主演は『魔人ドラキュラ』のベラ・ルゴシで、正気を失った船員が乗員を殺していく筋でした。幽霊船の型に、殺人の型が重なっていく。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……名前が……船を……呼ぶ……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "決め手：九つの空の樽",
+      "scene": "ch4",
+      "telop": "9樽が空",
+      "t": "第四面。決め手となる記号です。ジェノヴァで荷を降ろしたとき、1701樽のうち九つが空だった。壊れていないのに、空。この九樽だけが、ほかと違って赤いオークの木でできていたことが分かっています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "赤いオークは目が粗く、液体がしみ出す。つまり航海中、九樽ぶんのアルコールが船倉で蒸発していた可能性がある。ブリッグズ船長の親戚だったオリバー・コブは早くから「爆発を恐れて船を降りた」と唱えていた。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "でも、爆発した跡は無いんですよね？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "2006年の実験",
+      "t": "無い。そこで2006年、ロンドンの化学者アンドレア・セラが実験をした。蒸気に火が付くと、一瞬の閃光と衝撃だけで、焦げ跡を残さず燃え尽きることがある。ハッチが吹き上がり、何も焼けない。これなら痕跡の無さと矛盾しない。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "もう一つの筋がある。2000年代の調査番組で、記録映像作家アン・マクレガーは別の見方を出した。前の航海で運んだ石炭の粉がポンプを詰まらせ、水の深さが測れなくなったという説です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "測深棒",
+      "t": "甲板には、手作りの測深棒が放り出されていた。ポンプが使えず、船倉は暗くて水面が見えない。沈むのか沈まないのか分からない嵐の後、船長は陸の見える距離で、全員をボートに移した。マクレガーはそう推測しています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "二つの説に共通するのは「自分の意思で、一時的に降りた」という点。ボートを船につないで様子を見るつもりが、綱が切れた。帆を張った船は、漕ぐボートより速い。追いつけなかった。あとは、海です。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……綱は……誰が……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "その後：保険金と、嘘の残骸",
+      "scene": "ch5",
+      "telop": "1885年1月",
+      "t": "第五面。その後です。船はそのあとも十二年、持ち主を変えながら働き続けた。ただ「不吉な船」と呼ばれ、積荷も乗り手も集まりにくかったという話が残っています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "そして1885年1月。最後の船長ギルマン・パーカーは、ハイチ沖の浅い礁に船をわざと乗り上げた。保険金詐欺です。安い積荷に高額の保険をかけ、沈めて請求する。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "沈めたのは、十二年前に無人で見つかった船そのものです。「不吉な船」の評判を利用したのか、ただの偶然かは分からない。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "幽霊船の最後が、詐欺……。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "詐欺は露見し、ボストンで裁判になった。評決は不一致。パーカーは請求を取り下げ、数か月後に貧しいまま亡くなったとされます。謎の船の最後は、超常でも何でもない、人間の金の話でした。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "2001年「発見」",
+      "t": "2001年には作家クライブ・カッスラーの調査隊が「残骸を発見」と発表した。だが木材の年輪分析で、その木は1894年までまだ生えていたことが分かり、別の船と判明。船は、最後まで人を惑わせ続けた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "そしてコナン・ドイル。後年のシャーロック・ホームズ作品に「マチルダ・ブリッグズ」という船が登場する。船長一家の名字です。作家は、自分が話を作ったことを、たぶん忘れていなかった。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "まとめ：一般化できる条件",
+      "scene": "",
+      "telop": "三つの条件",
+      "t": "第六面。メアリー・セレスト号から取り出せる条件を三つ。一つ、記録に「空白」があること。船は無事、人だけがいない。説明の無い空白は、誰でも埋めたくなる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "二つ、否定が広告になること。ドイルの小説は、検事総長と領事が怒って否定したから有名になった。「嘘だ」という声は、嘘の存在を知らない人にまで嘘を届けてしまう。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "三つ、固有名詞があること。「さまよえるオランダ人」は伝説のまま。でもメアリー・セレストには船籍簿も、裁判記録も、沈んだ場所もある。実在の名前が、架空の話に重みを貸した。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "結局、温かい食事は、誰が書いたんでしょう。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "1883年の新聞記者と、1884年の無名の医師。そのあと百四十年、話を盛り続けた全員です。本物の十人は、たぶん自分で船を降りて、ボートごと海に消えた。そこだけは、静かに覚えておきたい。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "今日の結論。温かい食事は無かった。書いたのは小説家。船は無事で、消えたのは十人と救命ボート一艇。九つの空の樽と、放り出された測深棒。船長はたぶん、守るために降りた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "空白のある実話は、百四十年たっても埋め立てが止まらない。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "次回は「こっくりさん」。明治の日本に欧米から来た「テーブル・ターニング」が、学校の怪談になるまで。その道筋を分解します。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "ending",
+      "t": "……選ばれたのは、あなたです。チャンネル登録、お願いします。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ending",
+      "t": "……食卓は……まだ……温かい……"
+    }
+  ]
+}
