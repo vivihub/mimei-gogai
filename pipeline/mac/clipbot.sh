@@ -5,12 +5,12 @@
 #       その場面絵 6 枚を Mac 上の Codex（Runway 連携）で 10 秒の mp4 にし、
 #       ブランチ `clips` の clips/<id>/ に push する（完了印 DONE 付き）。
 #       クラウド側の定期タスクは origin/clips を見て mp4 を取り込む。
-# ログ: ~/Library/Logs/mimei-clipbot.log
+# ログ: ~/github/mimei-clipbot.log
 set -u
 REPO="$HOME/github/mimei-gogai"
 CLIPS_WT="$HOME/github/mimei-gogai-clips"   # clips ブランチ用 worktree
 LOCK="$HOME/.mimei-clipbot.lock"
-LOG="$HOME/Library/Logs/mimei-clipbot.log"
+LOG="$HOME/github/mimei-clipbot.log"
 CODEX_TIMEOUT=2400   # 秒（40分）
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$HOME/.nvm/versions/node/$(ls "$HOME/.nvm/versions/node" 2>/dev/null | tail -1)/bin:$PATH"
 

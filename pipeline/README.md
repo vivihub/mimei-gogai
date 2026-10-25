@@ -64,5 +64,5 @@ python pipeline/upload_youtube.py --dir pipeline/out/<name> --thumb-only   # サ
 
 ## 場面クリップ（Mac の Codex で生成する方式 = 定期タスクの方法B）
 - クラウド側: 場面絵 push 時に `episodes/scenes/<id>/WANT_CLIPS` を一緒に置く → `origin/clips` の `clips/<id>/DONE` ができるまで待つ（最大30分）→ `clips/<id>/*.mp4` を `episodes/scenes/<id>/` にコピー。
-- Mac 側: `pipeline/mac/clipbot.sh` を launchd が5分おきに実行（導入は `pipeline/mac/install.sh` を1回）。WANT_CLIPS があり DONE が無いエピソードを見つけたら Codex（Runway 連携）で mp4 を作り、ブランチ `clips` に push。ログ `~/Library/Logs/mimei-clipbot.log`。
+- Mac 側: `pipeline/mac/clipbot.sh` を launchd が5分おきに実行（導入は `pipeline/mac/install.sh` を1回）。WANT_CLIPS があり DONE が無いエピソードを見つけたら Codex（Runway 連携）で mp4 を作り、ブランチ `clips` に push。ログ `~/github/mimei-clipbot.log`。
 - mp4 は main には入れない（.gitignore）。clips ブランチだけに置く。

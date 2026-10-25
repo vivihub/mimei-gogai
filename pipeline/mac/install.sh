@@ -34,4 +34,4 @@ echo "----------------------------------------"
 echo "設定完了: $REPO"
 if command -v codex >/dev/null; then echo "codex: $(command -v codex)"; else echo "注意: codex が見つかりません（PATH: $PATH）"; fi
 if command -v ffprobe >/dev/null; then echo "ffprobe: OK"; else echo "注意: ffmpeg が無いので mp4 の検品は省略されます（brew install ffmpeg で入ります）"; fi
-echo "ログ: ~/Library/Logs/mimei-clipbot.log"
+echo "ログ: ~/github/mimei-clipbot.log"
