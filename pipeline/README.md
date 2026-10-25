@@ -66,3 +66,10 @@ python pipeline/upload_youtube.py --dir pipeline/out/<name> --thumb-only   # サ
 - クラウド側: 場面絵 push 時に `episodes/scenes/<id>/WANT_CLIPS` を一緒に置く → `origin/clips` の `clips/<id>/DONE` ができるまで待つ（最大30分）→ `clips/<id>/*.mp4` を `episodes/scenes/<id>/` にコピー。
 - Mac 側: `pipeline/mac/clipbot.sh` を launchd が5分おきに実行（導入は `pipeline/mac/install.sh` を1回）。WANT_CLIPS があり DONE が無いエピソードを見つけたら Codex（Runway 連携）で mp4 を作り、ブランチ `clips` に push。ログ `~/github/mimei-clipbot.log`。
 - mp4 は main には入れない（.gitignore）。clips ブランチだけに置く。
+
+## 演出エフェクトと場面ごとの動き（2026-10-25〜）
+動きを増やす仕組みが2つ。
+- **場面クリップの動き**: `gen_scene_video.py` の MOTION を「はっきり見える動き」に変更（霧が流れる・雲が動く・光が揺れる・カメラが寄る）。台本のトップレベル `"motion": {"hook": "<英語>", "ch1": ...}` に場面固有の動き（例: ヘッドライトがトンネルの壁をなめる、看板が風できしむ、水面が揺れる）を書くと、scenes の説明＋motion＋MOTION の順でプロンプトになる（Mac の clipbot も同じ規則）。再生は 1.5 倍スロー（`render.CLIP_SLOW`）のピンポン。
+- **演出エフェクト `fx.py`**: 行に `"fx": "fog,flash"` と書くと、その行以降の場面絵／クリップの上に重なる（`"fx": ""` で解除。舞台に戻ると自動解除）。種類: `fog` 霧 / `rain` 雨 / `snow` 雪 / `embers` 火の粉 / `flash` 稲光（5〜13秒おき） / `pulse` 縁が脈打つ / `red` 赤い縁 / `dark` 暗く / `shake` 冒頭1.2秒の揺れ / `zoom` その行で寄る。本編・ショート両方に効く。手本: `episodes/inunaki.json`。
+- 使いどころの目安: フック=`fog,pulse`（＋ハスの一言で `flash`）、「先に結論」=`zoom`、屋外の章=`fog`/`rain`/`snow`（屋内の場面には雨を使わない。窓があれば可）、事件・衝撃の行=`shake,flash`、血・警告=`red`、火・儀式=`embers`。1エピソード 8〜14 箇所。章の最初の行には必ず何か付け、場面の内容に合わせる。
+- コスト: 1 フレーム 20〜80ms 増（10分で最大 +15〜20 分）。

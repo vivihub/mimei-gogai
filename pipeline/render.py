@@ -51,7 +51,7 @@ if os.path.isdir(SCENE_DIR):
 KB_ZOOM = 0.07   # Ken Burns: 場面の最初から最後までで 7% ズーム
 
 # ---- 場面クリップ（scenes/<key>.mp4、Runway image-to-video の10秒）。あれば静止画ズームの代わりに使う ----
-CLIP_SLOW = 2        # 半速再生（10秒クリップ → 20秒）、端で折り返すピンポン再生でループの継ぎ目を消す
+CLIP_SLOW = 1.5      # 1.5倍スロー（10秒クリップ → 15秒。2026-10-25 に 2→1.5 で動きを強めた）、端で折り返すピンポン再生でループの継ぎ目を消す
 CLIP_FPS = 30
 _CLIP_FRAMES = {}    # key -> list of jpg paths
 def clip_frames(key):
@@ -292,11 +292,13 @@ def timeline():
     segs = [("title", TITLE_DUR, None)]
     n = 0
     scenes = assign_scenes(script["lines"])
+    import fx as FX
+    fxs = FX.assign(script["lines"], scenes)
     t = TITLE_DUR
-    for m, ln, sc in zip(meta, script["lines"], scenes):
+    for m, ln, sc, fxset in zip(meta, script["lines"], scenes, fxs):
         if ln.get("chapter"):
             n += 1; segs.append(("chapter", CHAPTER_DUR, (n, ln["chapter"], sc))); t += CHAPTER_DUR
-        m = dict(m); m["scene"] = sc; m["telop"] = ln.get("telop"); m["t0"] = t
+        m = dict(m); m["scene"] = sc; m["telop"] = ln.get("telop"); m["fx"] = fxset; m["t0"] = t
         segs.append(("line", m["dur"] + GAP, m)); t += m["dur"] + GAP
     segs.append(("end", END_DUR, None))
     # 場面ごとの開始・終了時刻（Ken Burns を場面全体で連続させる）

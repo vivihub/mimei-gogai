@@ -10,6 +10,7 @@ import argparse, json, os, subprocess, wave, glob
 import numpy as np
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 import render as R
+import fx as FX
 
 ROOT = R.ROOT
 SW, SH = 1080, 1920
@@ -160,6 +161,7 @@ def main():
     work = os.path.join(ROOT, "out", "short_frames"); os.makedirs(work, exist_ok=True)
     for f in glob.glob(os.path.join(work, "*")): os.remove(f)
     scenes = R.assign_scenes(script["lines"])
+    fxs = FX.assign(script["lines"], scenes)
     # 音声
     chunks = []; gap = np.zeros(int(GAP * SR), np.int16)
     for i in sel:
@@ -185,7 +187,11 @@ def main():
         still = frame(script, ln["c"], ln["t"], sc)
         for f in range(nf):
             tt = t + f / FPS
-            fr = frame(script, ln["c"], ln["t"], sc, R.clip_frame(sc, tt)) if clip else still
+            if clip or fxs[i]:
+                bg = R.clip_frame(sc, tt) if clip else R.SCENES[sc]
+                if fxs[i]: bg = FX.apply(bg, fxs[i], tt, tt - t, n)
+                fr = frame(script, ln["c"], ln["t"], sc, bg)
+            else: fr = still
             if n == 0 and tt < PUNCH_DUR and dur > PUNCH_DUR + 0.5: fr = punch(fr.copy(), script)
             ff.stdin.write(fr.convert("RGB").tobytes())
         t += nf / FPS; total += dur

@@ -11,9 +11,12 @@ import argparse, base64, io, json, os, subprocess, sys, time
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 KEY_FILE = "/home/claude/runway_api_key.txt"
-MOTION = ("Subtle, slow, continuous motion only: a very gentle camera push-in, drifting mist, faint flicker of the light "
-          "sources, slight sway of foliage or ripples on water. Keep the composition, colors and every object exactly as in "
-          "the image. No new objects, no people appearing, no text, no camera cuts, no fast movement.")
+MOTION = ("Clear, smooth, continuous motion: a slow camera push-in or lateral drift, thick mist rolling through, clouds "
+          "moving across the sky, light sources flickering and casting moving shadows, trees and grass swaying, water "
+          "rippling, loose paper or leaves drifting. Keep the composition, colors and every object as in the image. "
+          "No new objects, no people appearing, no text, no camera cuts, no violent shaking.")
+# 台本の "motion": {"hook": "...", ...} に場面ごとの動きの指示（英語）があれば MOTION の前に足す（例: headlights sweeping
+# across the tunnel wall, a door slowly opening, fog creeping along the road）。無ければ MOTION だけ。
 
 def api_key():
     k = os.environ.get("RUNWAYML_API_SECRET")
@@ -46,14 +49,15 @@ def main():
     client = RunwayML(api_key=key)
     sdir = os.path.join(ROOT, "episodes", "scenes", a.episode)
     ep_json = os.path.join(ROOT, "episodes", f"{a.episode}.json")
-    prompts = json.load(open(ep_json, encoding="utf-8")).get("scenes", {}) if os.path.exists(ep_json) else {}
+    ep = json.load(open(ep_json, encoding="utf-8")) if os.path.exists(ep_json) else {}
+    prompts, motions = ep.get("scenes", {}), ep.get("motion", {})
     keys = a.keys.split(",") if a.keys else sorted(os.path.splitext(f)[0] for f in os.listdir(sdir) if f.lower().endswith(".jpg"))
     ok, failed = [], []
     for k in keys:
         jpg, mp4 = os.path.join(sdir, f"{k}.jpg"), os.path.join(sdir, f"{k}.mp4")
         if not os.path.exists(jpg): failed.append((k, "no jpg")); continue
         if os.path.exists(mp4) and not a.force: ok.append(k); print(k, "exists"); continue
-        prompt = (prompts.get(k, "") + " " + MOTION).strip()
+        prompt = " ".join(x for x in (prompts.get(k, ""), motions.get(k, ""), MOTION) if x).strip()
         t0 = time.time()
         try:
             task = client.image_to_video.create(model=a.model, prompt_image=data_uri(jpg), prompt_text=prompt[:1000],

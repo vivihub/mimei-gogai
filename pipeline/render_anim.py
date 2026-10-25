@@ -5,6 +5,7 @@ import json, os, subprocess, wave, math, random
 import numpy as np
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 import render as R  # reuse layout, fonts, colours, title/end cards
+import fx as FX
 
 ROOT, W, H, FPS = R.ROOT, R.W, R.H, 30
 GAP, TITLE_DUR, END_DUR = R.GAP, R.TITLE_DUR, R.END_DUR
@@ -86,6 +87,7 @@ def paste_telop(img, telop_im, pos, i):
 def compose_scene(m, overlay, active, states, t_global, talk_env, i):
     prog = (t_global - m["scene_t0"]) / max(0.1, m["scene_t1"] - m["scene_t0"])
     img = R.scene_bg(m["scene"], prog, m["scene_idx"], t_rel=t_global - m["scene_t0"])
+    if m.get("fx"): img = FX.apply(img, m["fx"], t_global, t_global - m["t0"], m["scene_idx"])
     img.paste(overlay, (0, 0), overlay)
     if active:
         src = SMALL[active][states[active]]
