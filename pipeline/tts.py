@@ -4,8 +4,10 @@ import json, os, sys, wave
 from voicevox_core import VoicevoxCore
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-CORE_DIR = "/home/claude/vv/voicevox_core-linux-x64-cpu-0.15.7"
-DIC = open("/home/claude/vv/dic_path.txt").read().strip()
+import glob
+VV = os.environ.get("MIMEI_VV", "/home/claude/vv")
+CORE_DIR = (sorted(glob.glob(os.path.join(VV, "voicevox_core-*-0.15.7"))) or [os.path.join(VV, "voicevox_core-linux-x64-cpu-0.15.7")])[0]
+DIC = open(os.path.join(VV, "dic_path.txt")).read().strip()
 
 VOICE = {  # style id, speed, pitch, intonation  (あまり使われていない話者を選定)
     "mimei": dict(sid=52, speed=1.08, pitch=-0.02, intonation=1.0),   # 雀松朱司: 落ち着いた語り・MC

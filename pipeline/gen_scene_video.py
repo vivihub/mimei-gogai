@@ -10,7 +10,7 @@ API キー: 環境変数 RUNWAYML_API_SECRET、無ければ /home/claude/runway_
 import argparse, base64, io, json, os, subprocess, sys, time
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-KEY_FILE = "/home/claude/runway_api_key.txt"
+KEY_FILE = os.environ.get("RUNWAY_KEY_FILE", "/home/claude/runway_api_key.txt")
 MOTION = ("Clear, smooth, continuous motion: a slow camera push-in or lateral drift, thick mist rolling through, clouds "
           "moving across the sky, light sources flickering and casting moving shadows, trees and grass swaying, water "
           "rippling, loose paper or leaves drifting. Keep the composition, colors and every object as in the image. "

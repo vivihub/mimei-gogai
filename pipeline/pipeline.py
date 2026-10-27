@@ -8,8 +8,10 @@ The script must already exist (written by the Claude session from research). Fai
 """
 import argparse, json, os, shutil, subprocess, sys, datetime
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VVPY = "/home/claude/vv/vvenv/bin/python"
-VVLIB = "/home/claude/vv/voicevox_core-linux-x64-cpu-0.15.7"
+import glob as _glob
+VV = os.environ.get("MIMEI_VV", "/home/claude/vv")              # VOICEVOX 一式の置き場（Mac mini は ~/mimei/vv）
+VVPY = os.path.join(VV, "vvenv", "bin", "python")
+VVLIB = (sorted(_glob.glob(os.path.join(VV, "voicevox_core-*-0.15.7"))) or [os.path.join(VV, "voicevox_core-linux-x64-cpu-0.15.7")])[0]
 CREDIT = "VOICEVOX:雀松朱司／中部つるぎ／小夜SAYO"
 THUMB_HOOK = "#FFD35C"   # サムネ・ショート冒頭テロップの「問い」の色（紫背景に対して最も目立つ暖色）
 
@@ -102,7 +104,7 @@ def main():
     used = {ln.get("scene") for ln in script["lines"] if ln.get("scene")}
     missing = sorted(k for k in used if not any(f.startswith(k + ".") for f in os.listdir(sdir)))
     if missing: print("warn: scene images missing (fallback to studio):", missing, flush=True)
-    env = dict(os.environ, LD_LIBRARY_PATH=VVLIB)
+    env = dict(os.environ, LD_LIBRARY_PATH=VVLIB, DYLD_LIBRARY_PATH=VVLIB)   # Linux / macOS
     sh([VVPY, "-I", "tts.py"], env=env)
     sh([sys.executable, "render_anim.py"])
     outdir = os.path.join(ROOT, "out", name); os.makedirs(outdir, exist_ok=True)

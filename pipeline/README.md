@@ -42,6 +42,9 @@ python pipeline/pipeline.py --script pipeline/episodes/hachishaku.json
 - コスト: 5 クレジット/秒（1 クレジット = $0.01）→ 10 秒 1 本 $0.50、6 場面で約 $3/エピソード。
 - mp4 は git に入れない（`.gitignore`）。定期タスクは毎回生成する。
 
+## Mac mini で回す（2026-10-27〜、推奨）
+クラウドの定期タスクは push 権限が無く記録が落ちるため、実行元を Mac mini の Claude Code（headless, launchd 毎日 08:52）に移せる。導入は `bash -c "$(curl -fsSL https://raw.githubusercontent.com/vivihub/mimei-gogai/main/pipeline/macmini/install.sh)"`。詳細は `pipeline/macmini/README.md`。コードは `MIMEI_VV` / `MIMEI_FONT_*` / `RUNWAY_KEY_FILE` / `YT_OAUTH_JSON` でクラウドと Mac の両方で動く。
+
 ## 構成
 `tts.py`（VOICEVOX）→ `render_short.py`（冒頭〜「先に結論。」でショート版）／ `render.py`（静止フレーム・voice.wav・場面絵/テロップ）→ `mix_bgm.py`（bgm/ の normal/ominous/ending を場面切替・ダッキング）→ `render_anim.py`（口パク・まばたき・場面絵ズーム・テロップ・30fps）→ `pipeline.py`（サムネ・説明文）／ `save_scenes.py`（場面絵の保存）
 

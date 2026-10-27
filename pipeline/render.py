@@ -8,9 +8,16 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 W, H = 1920, 1080
 GAP, TITLE_DUR, END_DUR = 0.18, 1.5, 3.2   # 冒頭タイトルカードは1.5秒（離脱対策で短く）
 
-SERIF = "/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc"
-SANS = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
-def F(path, size, idx=2):  # idx 2 = JP face inside the .ttc
+def _font(env, *names):
+    """Noto CJK を探す: 環境変数 → Linux (fonts-noto-cjk の .ttc) → macOS (brew cask font-noto-*-cjk-jp の .otf)"""
+    cands = [os.environ.get(env, "")] + [os.path.join(d, n) for d in (
+        "/usr/share/fonts/opentype/noto", os.path.expanduser("~/Library/Fonts"), "/Library/Fonts") for n in names]
+    for c in cands:
+        if c and os.path.exists(c): return c
+    raise FileNotFoundError(f"{names[0]} not found (set {env})")
+SERIF = _font("MIMEI_FONT_SERIF", "NotoSerifCJK-Bold.ttc", "NotoSerifCJKjp-Bold.otf")
+SANS = _font("MIMEI_FONT_SANS", "NotoSansCJK-Regular.ttc", "NotoSansCJKjp-Regular.otf")
+def F(path, size, idx=0):  # idx 0 = JP face inside the .ttc (JP, KR, SC, TC, HK の順。2 は SC だった → 2026-10-27 修正)
     return ImageFont.truetype(path, size, index=idx)
 
 PAPER, PAPER2, INK, INK2, MUTED, RULE, ACCENT, SEAL = \
