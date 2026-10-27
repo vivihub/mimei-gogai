@@ -1,18 +1,6 @@
 {
   "queue": [
     {
-      "id": "tsukimi",
-      "title": "月の裏側の都市伝説",
-      "genre": "奇妙なニュース",
-      "angle": "『月の裏に基地がある』説の出どころと、実際の探査で分かっていること"
-    },
-    {
-      "id": "sakuradamon",
-      "title": "三億円事件",
-      "genre": "未解決事件",
-      "angle": "1968年、警察史上最大の捜査でなぜ捕まらなかったのか"
-    },
-    {
       "id": "kikuko",
       "title": "牛の首",
       "genre": "都市伝説",
@@ -79,6 +67,18 @@
       "title": "こっくりさん",
       "date": "2026-10-25",
       "note": "全自動（本編10分12秒・ショート32秒・6章・54行・出典11件・場面絵6枚・場面クリップ0/6（Runwayキー無し）・テロップ15・結論まで約15秒）本編 https://youtu.be/BzzKEXCC-aQ ／ ショート https://youtu.be/I_kGXFRSsgw（2026-10-28 20:00 JST 予約公開。10-27 メアリー・セレスト号のため）"
+    },
+    {
+      "id": "tsukimi",
+      "title": "月の裏側の都市伝説",
+      "date": "2026-10-26",
+      "note": "全自動（2026-10-26 実行。本編 https://youtu.be/WAkBirZDRgA ／ ショート https://youtu.be/rrXqPqz67qk、2026-10-29 20:00 JST 予約公開。当日の git push が拒否されたため記録が残らず、10-27 の実行時に補記。台本 json は未保存）"
+    },
+    {
+      "id": "sakuradamon",
+      "title": "三億円事件",
+      "date": "2026-10-27",
+      "note": "全自動（本編9分54秒・ショート32秒・6章・54行・出典12件・場面絵6枚・場面クリップ0/6（Runwayキー無し／git push 拒否で Mac bot 起動不可）・テロップ16・エフェクト12・結論まで約14秒）本編 https://youtu.be/0tzS-8DYK7U ／ ショート https://youtu.be/O2RMwQajA5Y（2026-10-30 20:00 JST 予約公開。10-29 月の裏側のため）"
     }
   ]
 }
