@@ -55,7 +55,7 @@ python pipeline/upload_youtube.py --dir pipeline/out/<name> --privacy unlisted -
 python pipeline/upload_youtube.py --dir pipeline/out/<name> --short        # ショート版（本編URLを説明文に自動挿入）
 python pipeline/upload_youtube.py --dir pipeline/out/<name> --thumb-only   # サムネだけ再設定
 ```
-- 設定は `youtube.json`（privacy / publish_hour_jst / tags / title_format）。マストヘッドとエンドカードのチャンネル名は `render.py` の `CHANNEL`。
+- 設定は `youtube.json`（privacy / publish_hour_jst / tags / title_format）。マストヘッドとエンドカードのチャンネル名は `render.py` の `CHANNEL`。題名カード・ショート見出し・サムネの赤いラベルは `render.py` の `LABEL`（「聞かせて、怪異放送」。台本の `category` は YouTube タイトルの【…】にだけ使う。2026-10-27〜）。
 - 認証は `youtube_oauth.json`（refresh token）。初回のみ作る。ブラウザ無し環境なら `python youtube_device_auth.py --client client_secret.json`（OAuth クライアント種別「テレビと制限付き入力デバイス」。URL とコードが出るのでスマホで承認）、手元のPCなら `python youtube_auth_setup.py client_secret.json`（種別「デスクトップ アプリ」）。できたファイルをGoogle Drive の「未明新聞_自動生成動画」フォルダに置く。定期実行はそこから `/home/claude/yt_oauth.json` に取り出して使う。git には入れない（.gitignore 済み）。
 - 結果は `out/<name>/youtube.json`（video_id, url, publish_at）。
 

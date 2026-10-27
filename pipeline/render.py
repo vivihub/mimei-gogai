@@ -22,6 +22,7 @@ NAMES = {"mimei": ("ミメイ", "未明新聞・配達員", "#B394DB"),
 IMGFILE = {"mimei": "gogai", "hasu": "hogo", "yomi": "yomi"}   # image file stems (unchanged)
 CHANNEL = "聞かせて、怪異放送。"            # YouTube チャンネル名（マストヘッド・エンドカード）
 CHANNEL_HANDLE = "@聞かせて怪異放送"
+LABEL = "聞かせて、怪異放送"               # 画面上の赤いラベル（題名カード・ショート・サムネ）。台本の category は使わない（2026-10-27〜）
 CHANNEL_URL = "https://www.youtube.com/@聞かせて怪異放送"
 SLOTS = {"mimei": 250, "yomi": 640, "hasu": 1030}   # x-center of each standing character
 PORTRAIT_H = 700
@@ -170,9 +171,10 @@ def article_card(d, img):
     x0, y0, x1, y1 = 1260, 200, W - 70, 620
     d.rectangle([x0, y0, x1, y1], fill=PAPER2, outline=INK, width=2)
     d.rectangle([x0 + 8, y0 + 8, x1 - 8, y1 - 8], outline=RULE, width=1)
-    d.rounded_rectangle([x0 + 34, y0 + 34, x0 + 34 + 150, y0 + 72], radius=3, outline=SEAL, width=2)
-    d.text((x0 + 109, y0 + 53), script["category"], font=F(SANS, 22), fill=SEAL, anchor="mm")
-    d.text((x0 + 200, y0 + 40), "本日の一面", font=F(SANS, 22), fill=MUTED)
+    lw = int(d.textlength(LABEL, font=F(SANS, 22))) + 40
+    d.rounded_rectangle([x0 + 34, y0 + 34, x0 + 34 + lw, y0 + 72], radius=3, outline=SEAL, width=2)
+    d.text((x0 + 34 + lw // 2, y0 + 53), LABEL, font=F(SANS, 22), fill=SEAL, anchor="mm")
+    d.text((x0 + 34 + lw + 24, y0 + 40), "本日の一面", font=F(SANS, 22), fill=MUTED)
     tf = F(SERIF, 56)
     y = y0 + 100
     for ln in wrap(script["title"], tf, x1 - x0 - 70, d):

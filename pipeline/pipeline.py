@@ -57,7 +57,7 @@ def thumbnail(script, dst):
     put("hasu", 0.9, 1230, 0.62); put("yomi", 0.95, 1440, 0.75); put("mimei", 1.12, R.W - 270)
     d = ImageDraw.Draw(img)
     # CTR対策: 「問い」(thumb_text) を最大サイズ・高コントラスト色で主役に、題名は上に小さく添える
-    d.text((110, 230), script.get("category", "未明ダイブ"), font=R.F(R.SANS, 36), fill=R.SEAL)
+    d.text((110, 230), R.LABEL, font=R.F(R.SANS, 36), fill=R.SEAL)
     tf = R.F(R.SERIF, 84); y = 290
     for ln in R.wrap(script["title"], tf, 1000, d)[:1]:
         d.text((110, y), ln, font=tf, fill=R.INK); y += 120

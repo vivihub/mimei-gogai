@@ -53,7 +53,7 @@ def header(d, script):
     d.rounded_rectangle([SW - 190, 92, SW - 60, 142], radius=4, outline=R.SEAL, width=3)
     d.text((SW - 125, 117), "号 外", font=R.F(R.SERIF, 28), fill=R.SEAL, anchor="mm")
     d.line([(50, 160), (SW - 50, 160)], fill=R.RULE, width=1)
-    d.text((60, 190), script.get("category", "未明ダイブ"), font=R.F(R.SANS, 30), fill=R.SEAL)
+    d.text((60, 190), R.LABEL, font=R.F(R.SANS, 30), fill=R.SEAL)
     tf = R.F(R.SERIF, 92); y = 240
     for ln in R.wrap(script["title"], tf, SW - 120, d)[:2]:
         d.text((60, y), ln, font=tf, fill=R.INK); y += 108
