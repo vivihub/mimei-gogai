@@ -1,0 +1,356 @@
+{
+  "id": "sakuradamon",
+  "title": "三億円事件",
+  "subtitle": "完全犯罪じゃない。警察が「顔」を決めすぎた",
+  "thumb_text": "3分で3億円／なぜ逃した？",
+  "category": "未明ダイブ",
+  "summary": "1968年12月10日、雨の朝の東京・府中。白バイ警官に化けた男が「車に爆弾がある」と言い、3分で約3億円の現金輸送車を持ち去った。遺留品は120点、捜査員は延べ17万人、容疑者リストは11万人。それでも1975年の時効まで捕まらなかったのはなぜか。モンタージュ写真の経緯、誤報、作家たちの推理、時効後の告白本まで、記録と噂を分けて分解します。",
+  "sources": [
+    "Wikipedia (JA)「三億円事件」 https://ja.wikipedia.org/wiki/三億円事件",
+    "Wikipedia (EN)「300 million yen robbery」 https://en.wikipedia.org/wiki/300_million_yen_robbery",
+    "別冊宝島編集部「「早く逃げろ！」白バイ警官のウソで「4525人分のボーナス」が行方知れずに…」文春オンライン 2026-03-24 https://bunshun.jp/articles/-/87093",
+    "欠端大林「戦後最大の未解決事件「3億円事件」の新事実… 警視庁に集められた「5人の男」の正体とは？」文春オンライン 2021-06-12 https://bunshun.jp/articles/-/45991",
+    "欠端大林「3億円事件“本当の真犯人”だけが知る「答え」とは？」文春オンライン 2021-06-12 https://bunshun.jp/articles/-/45992",
+    "永瀬隼介・渡辺潤・江藤史朗「伝説の未解決事件『三億円事件』、あの時何が起こったのか」現代ビジネス 2017-01-02 https://gendai.media/articles/-/50531",
+    "別冊宝島編集部「《公訴時効から50年》3億円事件の本当の犯人は？ 松本清張が唱えていた“もうひとつの説”」文春オンライン 2025-12-10 https://bunshun.jp/articles/-/84205",
+    "別冊宝島編集部「「3億円事件」発生直後に19歳少年が自殺、父は白バイ隊員だった…」文春オンライン 2025-12-10 https://bunshun.jp/articles/-/84206",
+    "トウシル編集部「【1968（昭和43）年12月10日】3億円事件発生」楽天証券 2025-12-10 https://media.rakuten-sec.net/articles/-/50864",
+    "高橋ホイコ「「三億円事件ツアー」で犯人と握手！ 三和交通のぶっ飛びツアーに参加してきた」ねとらぼ 2018-11-27 https://nlab.itmedia.co.jp/cont/articles/3285056/",
+    "eiga.com「初恋（2006）作品情報」 https://eiga.com/movie/1422/",
+    "Wikipedia (JA)「帝銀事件」 https://ja.wikipedia.org/wiki/帝銀事件"
+  ],
+  "scenes": {
+    "hook": "A rainy early morning in 1960s suburban Tokyo: a narrow road running along a long, high grey prison wall, a white police-style motorcycle leaning on its stand at the roadside, an empty black sedan ahead with thin white smoke drifting out from underneath it, wet asphalt reflecting a dull sky. No people, no text.",
+    "ch1": "Inside a small 1960s Japanese bank branch at dawn: a wooden counter, two closed duralumin cases on the floor, a black sedan waiting outside the rain-streaked glass door, a wall clock, fluorescent light. No people, no readable text.",
+    "ch2": "A smoky 1960s police investigation headquarters at night: a wall covered with pinned blank photographs and a large map, stacks of paper files on long desks, black rotary telephones, ashtrays, a single bare bulb, one empty picture frame at the center of the wall. No people, no readable text.",
+    "ch3": "A dim concrete garage at night: a police-style cap and white gloves laid on a workbench beside a tin of road flares, a cookie tin, a bar magnet and a hand megaphone, a can of white paint with a brush, a motorcycle under a tarp in the shadows. No people, no text.",
+    "ch4": "A Showa-era Japanese room at night: a small katakana typewriter on a low table, a single sheet of blank paper beside it, a reading lamp, a bookshelf, rain against the window, cigarette smoke curling in the lamplight. No people, no readable text.",
+    "ch5": "The same road along the long prison wall today at dusk: bare winter trees, a lone taxi with its roof light passing, a streetlamp just lit, the wall stretching into the distance, a calm residential neighborhood. No people, no text."
+  },
+  "motion": {
+    "hook": "Rain falls steadily; thin white smoke drifts out from under the sedan and dissolves; the motorcycle headlight flickers; the camera slowly pushes in along the wet road.",
+    "ch1": "Rain streaks slide down the glass door; the fluorescent light flickers faintly; the wall clock's second hand moves; the camera drifts slowly toward the duralumin cases.",
+    "ch2": "Cigarette smoke drifts under the bare bulb; the bulb sways gently and the shadows shift; pinned papers flutter slightly; the camera slowly pushes in on the empty frame.",
+    "ch3": "The tarp stirs in a draft; a weak overhead light flickers; dust floats in the beam; the camera drifts slowly across the workbench toward the cap.",
+    "ch4": "Rain runs down the window; the lamp flame-like glow flickers; cigarette smoke curls upward; the camera slowly pushes in on the blank sheet beside the typewriter.",
+    "ch5": "The taxi glides past and its roof light recedes; the streetlamp flickers on; bare branches sway; the camera slowly pulls back along the wall."
+  },
+  "lines": [
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "scene": "hook",
+      "telop": "1968年 府中",
+      "fx": "rain,pulse",
+      "t": "雨の朝。刑務所の塀に沿った道。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "t": "白バイ警官が現金輸送車を止め、叫んだ。「ダイナマイトがあった。早く逃げろ」。白い煙。3分後、車は消えていた。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "fx": "flash",
+      "t": "……警官は……どこへ……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "遺留品120点",
+      "fx": "zoom",
+      "t": "先に結論。三億円事件は完全犯罪ではない。遺留品は120点、バイクも車も置き去り。それでも捕まらなかった最大の理由は、警察が早くに「犯人の顔」を決めてしまったことだと指摘される。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "scene": "",
+      "t": "未明新聞のミメイです。今日は「三億円事件」を部品ごとに分解します。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "出来事の詳細：雨の朝の3分間",
+      "scene": "ch1",
+      "telop": "午前9時21分",
+      "fx": "rain",
+      "t": "第一面。出来事の詳細です。1968年12月10日、午前9時21分ごろ。東京都府中市、府中刑務所の北側の道。日本信託銀行国分寺支店を出た黒いセダンが、東芝府中工場へ向かっていた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "積まれていたのは、工場で働く4525人分の冬のボーナス。2億9430万7500円。ジュラルミンのケースに入った現金を、4人の銀行員が運んでいた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "現在の価値に直すと20億円以上と見積もられる額です。ただし翌日、東芝のボーナスは支給し直された。従業員の手元に損は残らなかった。被害者の顔が見えないことも、この事件が「怖い話」ではなく「謎」として育った理由の一つです。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "それだけの現金を、普通の車で運んでたんですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "脅迫状",
+      "t": "当時はそれが普通でした。そして事件の4日前、12月6日。支店長の家を爆破すると書いた脅迫状が銀行に届いていた。警察は張り込んだが、犯人は現れない。だから銀行員は「爆弾」という言葉に身構えていた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "fx": "shake,flash",
+      "t": "白バイの男は言った。「支店長の家が爆破された。この車にも爆弾があるかもしれない」。車の下にもぐり、「ダイナマイトがあった、早く逃げろ」。白煙が上がり、4人は塀際へ退いた。男は運転席に乗り込み、そのまま走り去った。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "発煙筒",
+      "fx": "rain",
+      "t": "煙の正体は、道路用の発煙筒でした。バイクは盗んだ市販の350ccを白く塗ったもの。輸送車は近くで乗り捨てられ、現金は別の盗難車に移されたとみられる。その車が団地の駐車場で見つかったのは、4か月後です。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "バイクも車も置いていったのに、たどれなかったんですか？"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……煙が晴れたら……誰もいない……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "広まり方：史上最大の捜査と、一枚の顔",
+      "scene": "ch2",
+      "telop": "延べ17万人",
+      "fx": "dark,pulse",
+      "t": "第二面。なぜ「伝説」になったのか。捜査の規模からです。投入された警察官は延べ17万人。重要参考人のリストは11万人。日本の警察史上、最大の捜査と言われます。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "遺留品は120点あまり。白バイ、メガホン、クッキーの缶、ハンチング帽、磁石、発煙筒。ところがどれも大量生産品で、販売ルートからたどることができなかった。多すぎる手がかりは、手がかりにならなかった。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "事件直後の検問は、効かなかったんですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "緊急の検問は敷かれた。しかし大渋滞を招き、その日の夕方には打ち切られたと記録されている。現金はその間に、別の車で静かに運び出されていた可能性が高い。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "でも、顔を見た銀行員が4人もいたんですよね。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "モンタージュ",
+      "t": "そこが決定的な部品です。事件直後に公開されたモンタージュ写真は、合成ではなかった。ある容疑者に似ているという証言をもとに、その容疑者に似た別人の顔写真をそのまま使ったものだった。しかもその人物は、すでに亡くなっていた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "警察は1971年に方針を変え、1974年にこの写真を正式に破棄した。しかし本や番組はその後も使い続けた。日本中が、存在しない顔を探していたことになる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1969年 誤報",
+      "fx": "red",
+      "t": "誤報もあった。1969年12月12日、新聞が「重要参考人」と大きく報じ、府中市の26歳の運転手が別件で逮捕された。だが犯行の時刻、彼は都心で入社試験を受けていた。翌日釈放。人生を壊された人が、ここに一人います。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "fx": "",
+      "t": "作家たちの座談会では、もう一つの指摘がある。これは誰も傷つけていない「窃盗」なのに、殺人を扱う捜査一課が主導し、単独犯説が強く押された。捜査の混乱は、犯人の優秀さではなく、捜査の形から来ていた可能性がある。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……探していた顔は……いない顔……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "古い部品：制服と、予行演習",
+      "scene": "ch3",
+      "telop": "帝銀事件",
+      "fx": "dark",
+      "t": "第三面。古い部品を探します。「制服の権威を借りて、人を動かす」。この型には前例がある。1948年の帝銀事件では、都の防疫員を装った男が、薬だと言って行員に毒を飲ませた。制服と専門用語は、疑いを止める。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "三億円事件の男は、暴力を使わなかった。使ったのは「爆弾」という言葉と、銀行がすでに受け取っていた脅迫状の記憶です。恐怖は事前に仕込まれていた。白煙は、その記憶に火をつけただけだった。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "脅迫状は、最初から計画の一部だったんですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "脅迫9回",
+      "t": "断定はできない。ただ、同じ1968年の4月から8月、近くの農協に脅迫状が9回届いていた事件があり、関連が分析されている。発煙筒をダイナマイトに見せかける強盗未遂も、事件の直前にあったとされる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "作家の中には、脅迫状は本番の準備ではなく、失敗した別の計画の材料を流用したものだ、と見る人もいる。どちらにしても、12月10日の3分間の前に、長い助走があった。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "白バイの格好って、そんなに簡単に信じられるものですか？"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……煙より先に……言葉が……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "決め手：19歳と、松本清張",
+      "scene": "ch4",
+      "telop": "12月15日",
+      "fx": "dark",
+      "t": "第四面。決め手の検証です。事件直後、立川の少年グループの一人、19歳の少年が浮かんだ。父親は現役の白バイ隊員。しかし少年は、事件の5日後、12月15日に自宅で亡くなった。ここから先は、実在の家族がいるので慎重に扱います。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "捜査を指揮した平塚八兵衛刑事は単独犯説を取り、少年を早い段階で容疑から外したとされる。一方で、それが少年の仲間への捜査を止めたのではないか、という見方が今も残っている。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "作家の松本清張も、この事件を書いていますよね。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "松本清張",
+      "t": "時効の年、1975年12月に『小説 3億円事件』を発表しました。アメリカの保険会社の調査報告という形で、公開情報から独自の犯人像を組み立てている。人物の年齢や住所は、遺族への配慮で変えてあるとされる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "fx": "pulse",
+      "t": "2016年の座談会では、三人の論者が三つの説を出した。少年グループによる複数犯。少年を使った冷静な大人。そして、銀行の内部情報を持つ数人の地下グループ。全員が一致したのは一点だけ。「完璧な計画」という伝説は、未解決だから生まれた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "非公表の二点",
+      "fx": "",
+      "t": "そして、今も警察が公表していない事柄がある。発煙筒にどうやって火をつけたか。そしてケースの中に入っていた「あるもの」。真犯人だけが答えられる問い、として残されている。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……答えを知る人は……黙っている……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "その後：時効、振込、そして「犯人」たち",
+      "scene": "ch5",
+      "telop": "1975年 時効",
+      "fx": "fog",
+      "t": "第五面。その後です。1975年12月10日、公訴時効が成立。この事件は誰も傷つけていない「窃盗」として扱われたため、時効は7年だった。1988年には民事の賠償責任も消えた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "社会のほうは変わった。翌日、東芝のボーナスは支給し直された。そして現金を運ぶ危険が広く知られ、給与や賞与を銀行振込にする流れが進み、警備会社が現金を運ぶのが当たり前になった。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "時効のあと、「自分が犯人だ」という人は出てきましたか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "2006年",
+      "t": "複数います。2018年には実行犯を名乗る人物の本も出た。ただ、どれも裏付けはない。フィクションでは、2006年の映画『初恋』が「犯人は18歳の女子高生だった」という設定で描き、2001年にはNHKが捜査の記録を番組にした。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "fx": "",
+      "t": "2018年には、タクシー会社が犯人の逃走ルートをたどる「三億円事件ツアー」を復活させた。56年前の3分間は、今も観光になるほど、この街に残っている。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……3分は……まだ……終わらない……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "まとめ：一般化できる条件",
+      "scene": "",
+      "telop": "三つの条件",
+      "fx": "",
+      "t": "第六面。三億円事件から取り出せる条件を三つ。一つ、手がかりが多すぎること。遺留品120点はどれも量産品で、調べるほど時間だけが消えた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "二つ、「答えの形」を先に決めたこと。存在しない顔のモンタージュと、単独犯説。探す対象を固定した瞬間、それ以外は見えなくなる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "三つ、誰も傷ついていないこと。被害者のいない事件は、恐怖より謎として消費される。だから犯人は「怪盗」になり、伝説が育った。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "結局、犯人は賢かったんでしょうか。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "分からない。ただ、「賢かった」と言い切る根拠は、捕まらなかったという結果しかない。捕まらなかった理由の半分は、探す側の事情でした。伝説は、犯人ではなく捜査が作った。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "今日の結論。三億円事件は完全犯罪ではない。遺留品は120点、バイクも車も置き去り。捕まらなかった最大の理由は、警察が早くに「犯人の顔」を決めてしまい、日本中が存在しない顔を探したことでした。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "雨の朝の3分間は、57年たっても、まだ誰のものでもない。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "次回は「牛の首」。聞いた人は恐怖で死ぬという、内容が存在しない怪談。小松左京の小説との関係を分解します。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "ending",
+      "t": "……選ばれたのは、あなたです。チャンネル登録、お願いします。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ending",
+      "t": "……ダイナマイトがあった……早く逃げろ……"
+    }
+  ]
+}
