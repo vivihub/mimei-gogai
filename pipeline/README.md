@@ -34,6 +34,12 @@ python pipeline/pipeline.py --script pipeline/episodes/hachishaku.json
   - スタイル接頭辞: "Dark moody illustration in an anime-adjacent ink-and-wash style, deep purple-black night palette with faint cream and amber highlights, cinematic 16:9, atmospheric. No text, no letters, no readable signs, no faces (silhouettes at most), no gore."
   - 実在の人物・被害者を描かない。場所・物・空気を描く。
 
+## 手作りサムネの差し替え口（2026-10-28〜）
+ChatGPT 等で作ったサムネを使いたいときは `episodes/thumbs/<id>.jpg`（png/webp 可）に置く。`pipeline.py` と `upload_youtube.py` はそれを自動サムネより優先し（1280x720・JPEG・2MB以下に正規化）、自動サムネは `out/<name>/<name>_thumb_auto.jpg` に残す。
+- URL や別パスから保存: `python3 save_thumb.py <id> <URL_or_path>`
+- 投稿後に差し替え: `python3 upload_youtube.py --dir out/<name> --thumb-only`（`--thumb path.jpg` で明示も可）
+- 定期タスク: Drive「未明新聞_自動生成動画」に `thumb_<id>.jpg` があれば download_file_content で取り出して `save_thumb.py <id> <path>` → 投稿時に自動で使われる。
+
 ## 場面クリップ（Runway image-to-video、2026-10-24〜）
 場面絵をそのまま 10 秒の動画にして、静止画ズームの代わりに背景で動かす（霧・光のゆらぎ・ゆっくりしたカメラ寄り）。
 - `python3 gen_scene_video.py <id>` が `episodes/scenes/<id>/<key>.jpg` → `<key>.mp4`（gen4_turbo・1280x720・10秒）を作る。既にある mp4 はスキップ（`--force` で作り直し）。
@@ -67,6 +73,7 @@ python pipeline/upload_youtube.py --dir pipeline/out/<name> --thumb-only   # サ
 
 ## 場面クリップ（Mac の Codex で生成する方式 = 定期タスクの方法B）
 - クラウド側: 場面絵 push 時に `episodes/scenes/<id>/WANT_CLIPS` を一緒に置く → `origin/clips` の `clips/<id>/DONE` ができるまで待つ（最大30分）→ `clips/<id>/*.mp4` を `episodes/scenes/<id>/` にコピー。
+- Mac 側はサムネも作る（2026-10-28〜）: クリップの後に Codex で `thumb.jpg`（既存サムネと同じ筆文字＋三人＋場面絵の構図。OPENAI_API_KEY か連携済みの画像生成ツールが要る。無ければスキップ）を作り `clips/<id>/thumb.jpg` として同梱。クラウド側は `python3 save_thumb.py <id> <path>` で `episodes/thumbs/<id>.jpg` に置けば投稿時に使われる。bot は main の未 push コミットを捨てない（`git push origin main` を促すログを出す）。
 - Mac 側: `pipeline/mac/clipbot.sh` を launchd が5分おきに実行（導入は `pipeline/mac/install.sh` を1回）。WANT_CLIPS があり DONE が無いエピソードを見つけたら Codex（Runway 連携）で mp4 を作り、ブランチ `clips` に push。ログ `~/github/mimei-clipbot.log`。
 - mp4 は main には入れない（.gitignore）。clips ブランチだけに置く。
 

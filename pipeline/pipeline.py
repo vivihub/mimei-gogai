@@ -110,6 +110,15 @@ def main():
     outdir = os.path.join(ROOT, "out", name); os.makedirs(outdir, exist_ok=True)
     shutil.move(os.path.join(ROOT, "out", "mimei_merry_v2.mp4"), os.path.join(outdir, f"{name}.mp4"))
     thumbnail(script, os.path.join(outdir, f"{name}_thumb.jpg"))
+    # 手作りサムネ（episodes/thumbs/<id>.jpg、ChatGPT 等で作ったもの）があれば優先。自動サムネは _thumb_auto.jpg に残す
+    import save_thumb
+    custom = save_thumb.custom_thumb_path(script.get("id", ""))
+    if custom:
+        shutil.move(os.path.join(outdir, f"{name}_thumb.jpg"), os.path.join(outdir, f"{name}_thumb_auto.jpg"))
+        save_thumb.save_jpeg(save_thumb.normalize(open(custom, "rb").read()), os.path.join(outdir, f"{name}_thumb.jpg"))
+        print("thumb: custom", os.path.relpath(custom, ROOT), flush=True)
+    else:
+        print("thumb: auto (put episodes/thumbs/<id>.jpg to override)", flush=True)
     description(script, script.get("sources", []), os.path.join(outdir, f"{name}_description.txt"))
     shutil.copy(os.path.join(ROOT, "script.json"), os.path.join(outdir, "script.json"))
     sh([sys.executable, "render_short.py", "--out", os.path.join(outdir, f"{name}_short.mp4")])   # vertical <=60s cut

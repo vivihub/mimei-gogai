@@ -3,7 +3,7 @@
 #
 # 役割: GitHub の main に「pipeline/episodes/scenes/<id>/WANT_CLIPS」が置かれたら、
 #       その場面絵 6 枚を Mac 上の Codex（Runway 連携）で 10 秒の mp4 にし、
-#       ブランチ `clips` の clips/<id>/ に push する（完了印 DONE 付き）。
+#       ブランチ `clips` の clips/<id>/ に push する（完了印 DONE 付き）。サムネ thumb.jpg も作れたら同梱する。
 #       クラウド側の定期タスクは origin/clips を見て mp4 を取り込む。
 # ログ: ~/github/mimei-clipbot.log
 set -u
@@ -30,7 +30,12 @@ command -v codex >/dev/null || { log "codex not found in PATH"; exit 0; }
 
 cd "$REPO" || exit 0
 git fetch -q origin main 2>>"$LOG" || { log "fetch main failed"; exit 0; }
-git checkout -q -B main origin/main 2>>"$LOG"
+# main に未 push のローカルコミットがあるときは捨てない（クラウドの push が拒否されたときに Mac 側で作ったコミットを守る）
+if [ "$(git rev-list --count origin/main..main 2>/dev/null || echo 0)" -eq 0 ]; then
+  git checkout -q -B main origin/main 2>>"$LOG"
+else
+  git checkout -q main 2>>"$LOG"; git merge -q --ff-only origin/main 2>>"$LOG" || log "main has local commits; not resetting (push them: git push origin main)"
+fi
 
 # clips ブランチの worktree を用意（無ければ orphan で作る）
 if [ ! -d "$CLIPS_WT/.git" ] && [ ! -f "$CLIPS_WT/.git" ]; then
@@ -70,8 +75,19 @@ for d in "$REPO"/pipeline/episodes/scenes/*/; do
     log "$id: codex failed 3 times, giving up (DONE with no clips)"
   fi
 
+  # サムネ（ChatGPT 画像生成と同じ路線を Codex で。できなければスキップ＝クラウド側は自動サムネ）
+  if [ ! -s "$d/thumb.jpg" ]; then
+    title="$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['title'])" "$REPO/pipeline/episodes/$id.json" 2>/dev/null)"
+    sub="$(python3 -c "import json,sys;print(json.load(open(sys.argv[1])).get('thumb_text','').replace('／',''))" "$REPO/pipeline/episodes/$id.json" 2>/dev/null)"
+    TPROMPT="YouTube のホラー解説チャンネル用サムネを1枚作り、pipeline/episodes/scenes/$id/thumb.jpg（1920x1080、JPEG）に保存してください。題材は「$title」（サブコピー: $sub）。参考スタイル（既存のサムネと揃える）: 左上に白い筆文字ロゴ「聞かせて、怪異放送。」（小さく、赤い音波の飾り）、左中央に大きな白×赤のかすれた筆文字で題名「$title」、左下に3人のキャラクター（pipeline/img/gogai.webp・pipeline/img/hogo.webp・pipeline/img/yomi.webp をそのまま使う。机とビンテージマイク、紙片）、右側〜背景に場面絵 pipeline/episodes/scenes/$id/hook.jpg の世界観を暗く高コントラストで広げた画。人物の顔・遺体・流血は描かない。画像生成の手段: (1) 環境変数 OPENAI_API_KEY があれば python の openai パッケージで images.edit（model gpt-image-1、参照画像に hook.jpg と3枚のキャラ画像、size 1536x1024）→ 1920x1080 にリサイズして保存。(2) 無ければ連携済みの画像生成ツールで同じ指示で生成してダウンロード。(3) どちらも無ければ何も作らず「thumb: skipped」とだけ出力して終了。git へのコミットや push はしない。"
+    log "$id: thumbnail via codex"
+    TMO="$(command -v timeout || command -v gtimeout || true)"   # macOS 標準には timeout が無い（brew coreutils なら gtimeout）
+    ( cd "$REPO" && ${TMO:+$TMO 900} codex exec --sandbox workspace-write -c 'sandbox_workspace_write.network_access=true' -c 'approval_policy="never"' "$TPROMPT" ) >> "$LOG" 2>&1 || log "$id: thumbnail codex failed/skipped"
+  fi
+
   # 検品してから clips ブランチへ
   mkdir -p "$CLIPS_WT/clips/$id"
+  if [ -s "$d/thumb.jpg" ]; then cp -f "$d/thumb.jpg" "$CLIPS_WT/clips/$id/thumb.jpg" && log "$id: thumb.jpg attached"; else log "$id: no thumb.jpg (cloud will use the auto thumbnail)"; fi
   ok=""
   for k in hook ch1 ch2 ch3 ch4 ch5; do
     f="$d/$k.mp4"

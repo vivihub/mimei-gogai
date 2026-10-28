@@ -1,0 +1,371 @@
+{
+  "id": "ushinokubi",
+  "title": "牛の首",
+  "subtitle": "中身は無い。だから最恐になった",
+  "thumb_text": "中身のない怪談は／なぜ怖い？",
+  "category": "未明ダイブ",
+  "summary": "聞いた者は三日で死ぬ。そう言われる怪談「牛の首」には、中身が存在しない。残っているのは題名と「最も恐ろしい話だった」という評判だけ。1965年2月8日に小松左京がサンケイスポーツで小説にし、1973年に筒井康隆がエッセイで広め、2002年に2ちゃんねるが漫画「贄の木」を元に中身を入れた。西日本の殺牛儀礼、1926年の同名記事、2022年の映画『牛首村』まで、「空の箱」がどう育ったかを研究者の分析と年表で分解します。",
+  "sources": [
+    "Wikipedia「牛の首」 https://ja.wikipedia.org/wiki/牛の首",
+    "吉田悠軌「vol.6 最恐怪談「牛の首」に隠された秘密――吉田悠軌の異類捜索記」晶文社 note 2020-09-30 https://note.com/shobunsha/n/n6b9205fd8572",
+    "朝里樹「語ってはいけないタブー怪談「牛の首」／都市伝説タイムトリップ」webムー 2023-11-26 https://web-mu.jp/history/28821/",
+    "小松左京ライブラリ「角川ホラー文庫「厳選恐怖小説集 牛の首」リリース」2022 https://sakyokomatsu.jp/5020/",
+    "クランクイン！「Koki,主演『牛首村』、怪談「牛の首」編の15秒映像解禁」2022-02-10 https://www.crank-in.net/news/100627/1",
+    "Wikipedia「牛首村」 https://ja.wikipedia.org/wiki/牛首村",
+    "Wikipedia「田中河内介」 https://ja.wikipedia.org/wiki/田中河内介",
+    "都市伝説ラボ「牛の首の都市伝説を検証｜中身のない最恐怪談の起源と恐怖の心理」 https://www.toshidensetsu-labo.net/ushinokubi-urban-legend-verification/",
+    "ピクシブ百科事典「牛の首」 https://dic.pixiv.net/a/牛の首"
+  ],
+  "scenes": {
+    "hook": "A lonely rural shrine beside a dark river at night under heavy storm clouds, an old wooden offering table, a worn stone marker, wet grass, faint lightning glow reflected on the water, bare trees. No people, no text.",
+    "ch1": "A dim Showa-era Japanese study at night, a low wooden desk with a small paper-shaded lamp, stacks of old books and paperbacks, a closed old wooden box on the desk with faint light leaking from under its lid, long shadows on the paper sliding doors. No people, no text.",
+    "ch2": "A 1960s writer's desk at night: a fountain pen, blank manuscript paper, a folded newspaper, an ashtray, a green-shaded desk lamp, rain streaks on the window, blurred city lights outside. No people, no readable text.",
+    "ch3": "A still mountain pond at dusk in western Japan, a straw ox effigy left at the water's edge, old moss-covered stones, cedar trees, mist on the water surface, dark clouds gathering for rain. No people, no text.",
+    "ch4": "A cramped early-2000s room lit only by a bulky CRT monitor glowing pale blue with an empty message board layout, a beige keyboard, tangled cables, a window showing deep night. No people, no readable text.",
+    "ch5": "An abandoned hillside hotel in snow country at night, broken windows, overgrown entrance, fog rolling across an empty parking lot, an empty poster frame in the foreground, distant dark mountains. No people, no text."
+  },
+  "motion": {
+    "hook": "Storm clouds churn slowly; lightning flickers behind the clouds and glints on the river; rain begins to fall; the camera slowly pushes in toward the shrine.",
+    "ch1": "The lamp flame flickers and sways; dust drifts in the light; the faint glow under the box lid pulses slowly; the camera creeps closer to the desk.",
+    "ch2": "Rain streaks run down the window; the desk lamp flickers; the newspaper edge lifts in a faint draft; the camera drifts slowly sideways.",
+    "ch3": "Mist crawls across the pond surface; ripples spread from the water's edge; cedar branches sway; clouds darken and raindrops begin to dot the water.",
+    "ch4": "The monitor glow pulses and flickers with scanlines; shadows shift on the wall; a small light blinks on the screen; the camera slowly pushes in toward the monitor.",
+    "ch5": "Fog rolls across the parking lot toward the camera; snow drifts down slowly; a broken signboard sways in the wind; a weak light flickers in one upper window."
+  },
+  "lines": [
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "scene": "hook",
+      "telop": "牛の首",
+      "fx": "fog,pulse",
+      "t": "聞いた者は、三日で死ぬ。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "t": "それほど恐ろしい怪談が、日本にある。題名は「牛の首」。中身を知る者は、全員死んだ。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "fx": "flash",
+      "t": "……題名だけ……残った……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "中身は無い",
+      "fx": "zoom",
+      "t": "先に結論。「牛の首」に中身は無い。あるのは「最も怖い話がある」という噂だけ。1965年に小松左京がそれを小説にし、聞き手の想像が中身を埋め続けてきた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "scene": "",
+      "t": "未明新聞のミメイです。今日は「牛の首」を部品ごとに分解します。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "怪談の中身：語られない話",
+      "scene": "ch1",
+      "fx": "dark,pulse",
+      "t": "第一面。まず噂の形から。「牛の首」という怪談がある。聞いた者は恐怖で震えが止まらず、三日と経たずに死ぬ。あまりに多くの人が死んだので、作者は仏門に入り、二度と語らずに世を去った、とされる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "だから今に伝わるのは、題名と「無類に恐ろしい話だった」という評判だけ。小学校の教師が児童に語ったら、クラス全員が失神した、という逸話も付いて回る。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "で、肝心の中身は……？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "無い。これが今日の核心です。誰も内容を知らない。知っている人は全員死んだことになっているので、確かめる手段もない。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "超常現象研究家の並木伸一郎さんは「怖いもの見たさの好奇心が生み出した、幻の都市伝説」と評しています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "空の箱",
+      "t": "整理すると、「牛の首」は怪談ではなく、怪談の入れ物です。箱だけがあって、中身は聞いた人が各自で想像する。箱のふたに「開けたら死ぬ」と書いてある。それだけで、何十年も生き残った。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "今日はこの箱を、四つの方向から調べます。誰が箱を作ったか。なぜ「牛の首」という名前か。誰が中身を入れたか。そして、同じ箱が他にもあるか。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……開けたい……でしょう……？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "初出：1965年、小松左京の小説",
+      "scene": "ch2",
+      "telop": "1965年2月8日",
+      "fx": "dark",
+      "t": "第二面。文献で確認できる最初の形は、1965年2月8日。サンケイスポーツに掲載された、小松左京のショートショート「牛の首」です。怪談好きの「私」が、「牛の首」の中身を知りたくて人に尋ね回る。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "ところが誰に聞いても「あんな恐ろしい話は聞いたことがない」と震えるだけで、話してくれない。やがて「私」は真相に気づいて震え上がる。小説の中でも、中身は最後まで出てこない。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "じゃあ、小松左京が作者、でいいんですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "出版界の小咄",
+      "t": "本人は否定しています。2003年のインタビューで、出版界にもともとあった小咄で、何十年かごとにミステリー界で流行する話だ、と語っている。つまり小松は、既にあった空の箱を、小説の形に固定した人です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "もう一人、重要人物がいる。筒井康隆。1973年、夕刊フジのエッセイ「狂気の沙汰も金次第」で、SF作家の今日泊亜蘭から聞いた話として「世界一怖い怪談」と紹介した。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1973年 筒井康隆",
+      "t": "都市伝説蒐集家の松山ひろしさんは、作家仲間の内輪ネタがこのエッセイをきっかけに世間へ出た、と分析している。小説が箱を固定し、エッセイが箱を配った。この二段構えで、噂は全国に広がったとされる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "fx": "",
+      "t": "怪談研究家の吉田悠軌さんは、地理にも注目する。この噂は近畿から中国・四国、特に兵庫県を中心に西日本で語られてきたとみる。小松が育った西宮・尼崎、筒井が執筆直前に移った神戸市垂水区。どちらも兵庫です。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……西の……水辺で……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "古い部品：牛の首を沈める儀式",
+      "scene": "ch3",
+      "telop": "殺牛儀礼",
+      "fx": "fog,rain",
+      "t": "第三面。古い部品を探します。なぜ「牛の首」という名前なのか。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "吉田さんが手がかりにしたのが、民俗学者・筒井功さんの『殺牛・殺馬の民俗学』。西日本を中心に、水辺で牛を屠り、首と血を水に流し入れる「殺牛儀礼」が行われていた、という研究です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "目的は雨乞い。死と血の穢れで神を怒らせ、雨を降らせる。神にご馳走するのではなく、怒らせるための儀式だったと解釈されている。「牛鬼」の伝説や「牛淵」といった地名に、その痕跡が残るとされる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1939年8月",
+      "t": "新しい記録もある。1939年8月、兵庫県川辺郡で牛の首と血を使った雨乞いが行われ、大阪朝日新聞が報じた。1913年の和歌山にも同様の報告がある。伝説ではなく、昭和の新聞記事です。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "でも、そんな儀式があったなら、記録はもっと残りそうですけど。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "口外すると降らない",
+      "t": "そこが肝です。筒井功さんは、記録が乏しい理由を「口外をはばかる風潮」と「秘密性の高い祭祀」に求めている。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "静岡の浅畑沼には、牛の頭を沈めれば雨が降るが、口外すると降らなくなる、という伝承もある。「語ってはいけない」は、儀式の側に最初からあった。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "fx": "",
+      "t": "吉田さんの推測はこうです。隠された殺牛の記憶が「牛鬼」の怪談に変わり、現代に近づいて「牛の首」という題名だけが残った。あくまで推測で、本人も「真相は一切わからない」と断っている。ただ、題名の由来としては、いちばん筋が通る。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……口にすると……雨が……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "決め手：空の箱に、誰が中身を入れたか",
+      "scene": "ch4",
+      "telop": "2002年5月21日",
+      "fx": "dark,pulse",
+      "t": "第四面。決め手の検証です。ネットには「牛の首の真の内容」とされる話が複数出回っている。いちばん有名なのが、飢饉の村の話。村人が生け贄に牛の頭をかぶせ、「牛追い祭り」と称して狩り、食べていた、という内容です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "出どころは特定されている。2002年5月21日、2ちゃんねるオカルト板「死ぬ程洒落にならない話を集めてみない Part14」への書き込み。投稿者は直後に自分の創作だと明かした。それでも「真・牛の首」として独り歩きした。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1995年「贄の木」",
+      "t": "さらに元がある。星野之宣さんの漫画『宗像教授伝奇考』の一篇「贄の木」、1995年の作品です。飢饉の村で人が狩られ、食べられる。かぶせられているのは猪の頭。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "猪を牛に置き換えると、ネット版とほぼ一致する。Webサイト『現代奇談』が早くから指摘していた。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "他にも「真相」って、あるんですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "あります。戦前の二つの村の争いを描いた話など。作家の朝里樹さんは、誰も知らないはずの話が細部まで残っているのは矛盾だとして、個人の創作と見ている。どの「真相」も、一次資料の裏付けはゼロです。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1926年の同名記事",
+      "fx": "red",
+      "t": "ひとつ、気になる文献はある。1926年、雑誌『文藝市場』に石角春洋が「牛の首」と題する記事を書いている。丹後の山村を舞台にした幻想譚で、父から聞いた話とされる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "ただし都市伝説との関係は不明。題名の一致が偶然か、根が同じかは分からない。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "fx": "",
+      "t": "整理します。箱は1965年より前からあった。中身は2002年にネットが入れた。入れた中身は1995年の漫画の改作だった。「最も怖い話」の実体は、三十年ずつずれた三つの部品でできている。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……中身は……あとから……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "その後：映画と、同じ型の怪談",
+      "scene": "ch5",
+      "telop": "2022年2月18日",
+      "fx": "fog,snow",
+      "t": "第五面。その後です。2022年2月18日、清水崇監督の映画『牛首村』が公開。『犬鳴村』『樹海村』に続く「恐怖の村」シリーズの第三弾で、主演はKoki,さん。富山県の廃ホテル、坪野鉱泉でロケが行われた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "映画は、双子の片方を牛頭の神に返す村の風習、という中身を独自に用意した。中身のない怪談を映画にするには、中身を作るしかない。同じ年の10月には、角川ホラー文庫から小松左京の『厳選恐怖小説集 牛の首』も出ています。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "同じ型の話って、他にもありますよね？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "鮫島事件",
+      "t": "ある。2ちゃんねるで生まれた「鮫島事件」。「触れてはいけない事件がある」という設定だけが先にあって、中身は無い。「牛の首」と同じ構造だと指摘されています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "fx": "",
+      "t": "もっと古い例も。朝里さんが挙げる「田中河内介の最期」。幕末の志士、田中河内介の死の真相を怪談会で語ろうとした記者が、途中で倒れて数日で死んだ、という話。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "1938年の田中貢太郎『怪談会の怪異』などに記録がある。「語ると死ぬ話」の型は、戦前にすでにあった。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "笑い死ぬジョーク",
+      "t": "海外にも。英国のコメディ番組モンティ・パイソンには、聞いた者が笑い死ぬジョークのスケッチがある。ジョークの中身は、最後まで明かされない。怖い話も笑い話も、箱だけで成立する。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……箱は……増える……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "まとめ：一般化できる条件",
+      "scene": "",
+      "telop": "三つの条件",
+      "fx": "",
+      "t": "第六面。「牛の首」から取り出せる条件を三つ。一つ、禁止があること。「聞くと死ぬ」「語ってはいけない」。禁止は、好奇心の燃料になる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "二つ、中身が空であること。空だから、聞き手がいちばん怖いものを自分で入れる。1947年のオルポートとポストマンの研究では、噂の広がりは「重要性」と「曖昧さ」の掛け算で決まる。中身ゼロは、曖昧さの最大値です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "三つ、本物の部品がどこかにあること。昭和まで続いた殺牛儀礼、1965年の小説、1973年のエッセイ、1995年の漫画。調べると何かに当たるから、「全部嘘」とは言い切れなくなる。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "結局、牛の首って、何だったんでしょう。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "吉田さんの比喩を借ります。ドーナツです。穴そのものは食べられない。食べられるのは周りだけ。そして、周りを食べ続けている限り、穴は消えない。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "今日の結論。「牛の首」に中身は無い。あるのは「最も怖い話がある」という噂と、それを埋めようとした無数の想像だけ。1965年の小説が空洞を固定し、2002年のネットが中身を入れた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "本当に怖いのは、話の中身ではなく、「中身を知りたい」と思ってしまう自分の方かもしれない。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "次回は「杉沢村伝説」。青森の山奥、一夜で滅んだとされる村。地図から消された村は本当にあったのか。犬鳴村と比べながら分解します。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "ending",
+      "t": "……選ばれたのは、あなたです。チャンネル登録、お願いします。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ending",
+      "t": "……牛の首……聞きたい……？"
+    }
+  ]
+}

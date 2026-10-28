@@ -3,6 +3,7 @@
 
   python upload_youtube.py --dir out/mimei_kuchisake_20261021 [--privacy public|unlisted|private]
                            [--publish-at 2026-10-21T20:00:00+09:00] [--oauth /path/youtube_oauth.json] [--dry-run]
+                           [--thumb path/to/custom.jpg]   # 手作りサムネを使う（省略時: episodes/thumbs/<id>.jpg があればそれ、無ければ out/<name>/<name>_thumb.jpg）
 
 Credentials: --oauth, else $YT_OAUTH_JSON, else /home/claude/yt_oauth.json  (made by youtube_auth_setup.py;
 lives in the Drive folder 未明新聞_自動生成動画 — the scheduled run downloads it there, never from git).
@@ -54,6 +55,26 @@ def build_meta(outdir, cfg, privacy, publish_at, short=False):
     mp4 = os.path.join(outdir, f"{name}_short.mp4" if short else f"{name}.mp4")
     return body, mp4, (None if short else os.path.join(outdir, f"{name}_thumb.jpg"))
 
+def pick_thumb(outdir, explicit=None):
+    """使うサムネを決める: --thumb > episodes/thumbs/<id>.jpg（手作り） > out/<name>/<name>_thumb.jpg（自動）。
+    手作りのものは 1280x720 JPEG 2MB 以下に正規化して out/<name>/<name>_thumb.jpg に置き直す。"""
+    import save_thumb
+    name = os.path.basename(outdir.rstrip("/"))
+    dst = os.path.join(outdir, f"{name}_thumb.jpg")
+    src = explicit
+    if not src:
+        try:
+            ep = json.load(open(os.path.join(outdir, "script.json"), encoding="utf-8")).get("id", "")
+            src = save_thumb.custom_thumb_path(ep)
+        except Exception:
+            src = None
+    if src and os.path.abspath(src) != os.path.abspath(dst):
+        if os.path.exists(dst) and not os.path.exists(os.path.join(outdir, f"{name}_thumb_auto.jpg")):
+            os.replace(dst, os.path.join(outdir, f"{name}_thumb_auto.jpg"))
+        save_thumb.save_jpeg(save_thumb.normalize(open(src, "rb").read()), dst)
+        print(f"thumbnail: custom {src}", file=sys.stderr)
+    return dst
+
 def set_thumbnail(yt, vid, thumb):
     """Returns True when set. 403 = channel not yet verified (phone) for custom thumbnails — report, don't fail."""
     from googleapiclient.http import MediaFileUpload
@@ -76,7 +97,7 @@ def set_thumbnail_only(a):
     rec = json.load(open(rec_path, encoding="utf-8"))
     name = os.path.basename(a.dir.rstrip("/"))
     yt = build("youtube", "v3", credentials=load_creds(a.oauth), cache_discovery=False)
-    ok = set_thumbnail(yt, rec["video_id"], os.path.join(a.dir, f"{name}_thumb.jpg"))
+    ok = set_thumbnail(yt, rec["video_id"], pick_thumb(a.dir, a.thumb))
     rec["thumbnail_set"] = ok
     json.dump(rec, open(rec_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(json.dumps({"video_id": rec["video_id"], "thumbnail_set": ok}, ensure_ascii=False))
@@ -97,6 +118,7 @@ def main():
     ap.add_argument("--oauth", default=os.environ.get("YT_OAUTH_JSON", "/home/claude/yt_oauth.json"))
     ap.add_argument("--dry-run", action="store_true", help="print the request body, upload nothing")
     ap.add_argument("--thumb-only", action="store_true", help="only (re)set the thumbnail of the video recorded in <dir>/youtube.json")
+    ap.add_argument("--thumb", help="custom thumbnail image (jpg/png); default: episodes/thumbs/<id>.jpg if present, else the auto one")
     ap.add_argument("--short", action="store_true", help="upload <name>_short.mp4 as a Shorts clip linking to the long video in <dir>/youtube.json")
     a = ap.parse_args()
     if a.thumb_only:
@@ -132,7 +154,7 @@ def main():
                 retries += 1; time.sleep(2 ** retries); continue
             raise
     vid = resp["id"]
-    thumb_ok = set_thumbnail(yt, vid, thumb) if thumb else None
+    thumb_ok = set_thumbnail(yt, vid, pick_thumb(a.dir, a.thumb)) if thumb else None
     result = {"video_id": vid, "url": f"https://youtu.be/{vid}", "privacy": body["status"]["privacyStatus"], "thumbnail_set": thumb_ok,
               "publish_at": body["status"].get("publishAt"), "title": body["snippet"]["title"],
               "uploaded_at": datetime.datetime.now(JST).isoformat(timespec="seconds")}
