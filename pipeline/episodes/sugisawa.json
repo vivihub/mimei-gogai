@@ -1,0 +1,356 @@
+{
+  "id": "sugisawa",
+  "title": "杉沢村伝説",
+  "subtitle": "村も殺人も無い。消したのは斧ではなく過疎",
+  "thumb_text": "消された村は／本当にあった？",
+  "category": "未明ダイブ",
+  "summary": "青森の山中、昭和初期に一人の男が村人全員を殺して自ら命を絶ち、県が地図から消したという「杉沢村」。白木の鳥居、髑髏の形の石、立入りを警告する看板、血痕の残る廃屋。1995年の弘前大学の報告書から1997年の投稿サイト、2000年8月24日のテレビ放送までの年表と、津山事件・『八つ墓村』・『野性の証明』・新和村事件という部品、そして青森空港そばに実在する集落跡までを分解します。",
+  "sources": [
+    "穂積昭雪「村民全員がひとりの男に殺され、青森県の地図からも消えた…「杉沢村伝説」の真相に迫る」現代ビジネス 2026-07-31 https://gendai.media/articles/-/169596",
+    "穂積昭雪「《青森県の大量殺戮村》はなぜ地図から消されたのか？…「杉沢村伝説」と「平成の大合併」の意外な関係性」現代ビジネス 2026-07-31 https://gendai.media/articles/-/169597",
+    "朝里樹「杉沢村の謎 「地図から消された村」を語り継ぐ怪奇譚のリアル」webムー 2021-08-19 https://web-mu.jp/history/14905/",
+    "ムー編集部「【青森県・杉沢村の謎】「地図から消された村」はどこにあったのか?」ムー2021年9月号（fujisan.co.jp）2021-08-06 https://www.fujisan.co.jp/trends/?p=25314",
+    "米津海「インターネット都市伝説の架空性と領域」京都学園大学人文学会 2015 https://lab.kuas.ac.jp/~jinbungakkai/pdf/2014/h2014_06.pdf",
+    "Wikipedia「杉沢村伝説」 https://ja.wikipedia.org/wiki/杉沢村伝説",
+    "朝里樹「「犬鳴村」が“日本最恐”と呼ばれる存在になった「納得の理由」」現代ビジネス 2020-02-08 https://gendai.media/articles/-/70252",
+    "ヨミノ・ユナ「地図から消された惨劇の記憶：「杉沢村伝説」という“終わらない探索ゲーム”の正体」TOCANA 2026-03-21 https://tocana.jp/2026/03/post_292986_entry.html",
+    "朝霧怜「杉沢村伝説とは｜青森に消えた村の都市伝説と実在説の検証」百鬼夜話 2026-05-27 https://yokaiarchive.com/urban-legend/sugisawa-village",
+    "ジョルダン映画情報「杉沢村都市伝説 劇場版 作品情報」 https://movie.jorudan.co.jp/film/80506/"
+  ],
+  "scenes": {
+    "hook": "A narrow mountain road in northern Japan at dusk, a pale weathered wooden torii gate standing alone at the edge of a dark cedar forest, a rounded boulder shaped vaguely like a skull resting beneath it, thick fog on the road, one faint light far away. No people, no text.",
+    "ch1": "The interior of a collapsed abandoned farmhouse at night, broken sliding doors, rotten tatami, peeling plaster walls, moonlight falling through a hole in the roof, dust in the air, cobwebs, an overturned wooden chest. No people, no text, no gore.",
+    "ch2": "A dim late-1990s student room lit by a CRT monitor showing a plain early web page, a dial-up modem with blinking lights, a stack of occult magazines, a small television glowing with static, photographs of a torii pinned to the wall. No readable text, no people.",
+    "ch3": "An old archive reading desk at night, bundles of yellowed newspapers tied with string, a film reel and a worn paperback novel, a brass magnifying glass, a green desk lamp, rain streaking the dark window. No readable text, no people.",
+    "ch4": "The same roadside torii gate in flat daylight, a paved two-lane road, a small stone monument behind the gate, a chain-link fence and a golf course far behind, a jet airliner contrail in a pale autumn sky, ordinary and quiet. No people, no text.",
+    "ch5": "A car parked on a mountain road at night with headlights pointed at a torii gate, a camera tripod set up on the asphalt, the glow of a phone screen left on the hood, mist drifting across the beams, dark forest behind. No people, no text."
+  },
+  "motion": {
+    "hook": "Fog crawls slowly along the road toward the camera; the faint distant light flickers; the camera pushes in very slowly toward the torii gate while branches sway.",
+    "ch1": "Dust drifts in the moonbeam; a torn paper door flaps gently; the moonlight shifts as clouds pass; the camera drifts slowly sideways.",
+    "ch2": "The CRT screen flickers and scrolls; the modem lights blink; television static shimmers; the camera slowly pushes in toward the monitor.",
+    "ch3": "Rain streaks down the window; the lamp light trembles slightly; a page of the newspaper lifts in a draft; the camera slowly pulls back.",
+    "ch4": "Clouds slide across the sky; grass by the roadside sways in wind; the contrail stretches; the camera slowly pans across the gate.",
+    "ch5": "Mist drifts through the headlight beams; the beams flicker once; the phone screen glows and dims; the camera slowly pushes in toward the gate."
+  },
+  "lines": [
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "scene": "hook",
+      "telop": "青森県",
+      "t": "青森の山道。白木の鳥居と、髑髏の形の石。",
+      "fx": "fog,pulse"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ominous",
+      "t": "その奥に、一夜で村人全員が殺された村があるという。地図からも消された村、杉沢村。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……消したのは……誰……？",
+      "fx": "flash"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "村は存在しない",
+      "t": "先に結論。杉沢村は存在しない。村人全員が殺された記録も、青森には無い。ただ、鳥居のある集落跡は実在する。そこを消したのは斧ではなく、飢饉と過疎でした。",
+      "fx": "zoom"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "scene": "",
+      "t": "未明新聞のミメイです。今日は「杉沢村伝説」を部品ごとに分解します。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "噂の中身：四つの目印",
+      "scene": "ch1",
+      "telop": "昭和初期",
+      "t": "第一面。噂の筋を確認します。青森県の山中に、杉沢村という小さな村があった。昭和初期、村人の一人が突然発狂し、斧で村人全員を殺して、最後は自ら命を絶った。",
+      "fx": "dark,pulse"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "誰もいなくなった村は隣村に編入されて廃村になり、県は地図と公文書から名前を消した。けれど跡地は今も山の中にあり、迷い込んだ者を死者の霊が襲う。これが骨格です。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "行った人の話だと、入口に目印があるんですよね？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "四つの目印",
+      "t": "はい。目印は四つ。まず、朽ちた白木の鳥居。その下に、髑髏の形をした石。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "そして「ここから先へ立ち入る者、命の保証はない」という看板。奥の林道に、壁と床が血で覆われた廃屋。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "車で入るとフロントガラスを無数の手で叩かれ、血の手形がつく。生きて帰れても精神を壊すか、数日後に行方が分からなくなる。細部は語り手で変わりますが、四つの目印はほぼ固定です。",
+      "fx": "red"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "注目してほしいのは「県が消した」という部分。殺人そのものより「行政が隠した」という筋が、この話を他の心霊スポットと分けている。隠されたものは、探したくなる。",
+      "fx": ""
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……隠した場所ほど……人が来る……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "初出と広まり方：1995年から2000年",
+      "scene": "ch2",
+      "telop": "1995年",
+      "t": "第二面。いつ、どこから始まったのか。怪談研究家の吉田悠軌さんが見つけた最古の記録は1995年。弘前大学の小池淳一さんの論文「世間話と伝承」で、学生が「青森の怖い話の名所」として杉沢村を挙げていた。",
+      "fx": "dark"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "つまり、ネットが生んだ話ではない。1990年代半ばには地元の若い世代の口伝えとして存在していた。米津海さんの論文も、1996年ごろ青森市内の若者の間で流行したという雑誌記事を引いています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1997年 投稿",
+      "t": "文字で残る最初の形は1997年。個人サイト「怪異・日本の七不思議」への投稿で、「青森空港の近く」「青年が斧で村人を殺して自殺」「合併で地図から消えた」が一つにまとまって書かれていた。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "まだこの段階だと、知ってる人は少なかったんですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "投稿者自身が「他府県ではほとんど知られていない」と書いています。転機は1999年。同じサイトに鳥居と石碑の写真が投稿された。文章だけだった噂に、はじめて「証拠らしい画像」がついた。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "2000年8月24日",
+      "t": "そして2000年8月24日。フジテレビ系『奇跡体験！アンビリバボー』の二時間特番が杉沢村を取り上げ、全国に広がる。番組は数回特集したが村は見つからず、「時空の歪みの中に現れたり消えたりする村」と結論づけた。",
+      "fx": "shake,flash"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "放送の十日後、2000年9月3日には地元紙の東奥日報が「ネットで話題」として記事にする。オカルト系の雑誌も次々に追い、米津さんの論文は2013年までに雑誌記事11件を数えています。",
+      "fx": ""
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……口から……画面へ……画面から……山へ……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "古い部品：津山、八つ墓村、風道",
+      "scene": "ch3",
+      "telop": "1938年 津山事件",
+      "t": "第三面。古い部品を探します。「一人の男が一夜で村人を殺し、自ら命を絶つ」。この型には有名な実例がある。1938年、昭和13年、岡山県の津山事件。青年が一時間半ほどで30人を殺害し、山中で自殺した。",
+      "fx": "rain"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "横溝正史は、この事件を題材に『八つ墓村』を書いた。2000年の東奥日報の記事は、噂の筋をそのまま「八つ墓村の基になった杉沢村」と紹介している。つまり地元の語りの段階で、すでに津山と結びついていた。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "でも津山は岡山ですよね。青森まで、どうやって飛んだんですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "『野性の証明』",
+      "t": "橋渡しの候補が二つあります。一つは森村誠一の小説『野性の証明』。岩手県の架空の集落「風道」で、若者が斧で住民を殺し、生き残りは少女一人、村は廃村になる。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "1978年の映画版は高倉健の主演で、青森の場面も出てくる。作家の朝里樹さんは、斧と全滅と廃村という筋が杉沢村とよく似ていると指摘しています。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "1953年 新和村",
+      "t": "もう一つは、青森で本当に起きた事件。1953年、昭和28年12月12日、中津軽郡新和村、今の弘前市で、リンゴ農家の青年が家族7人を猟銃で殺害した。斎藤充功さんや石川清さんは、これを伝説の元とみています。",
+      "fx": "shake"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "ただし照合すると合わない。ライターの穂積昭雪さんの整理では、新和村は戦前ではなく、殺されたのは村人全員ではなく一家。犯人は自殺せず自首し、心神喪失と鑑定されて殺人については無罪になった。",
+      "fx": ""
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "つまり、津山からは「全滅と自殺」、新和村からは「青森と発狂」、風道からは「斧と廃村」。三つの話の似た部分だけが、一つの村に縫い合わされた。穂積さんはこれを、昭和の事件が組み合わさった「おとぎ話」と呼ぶ。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……三つの……傷を……一枚の布に……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "決め手：鳥居は、どこにあるのか",
+      "scene": "ch4",
+      "telop": "青森空港のそば",
+      "t": "第四面。決め手の検証です。鳥居は実在するのか。します。場所は青森市の小畑沢、小杉という集落の跡。青森空港のすぐ近くです。山奥どころか舗装道路のわきに鳥居が立ち、近くにはゴルフ場がある。",
+      "fx": "fog"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "朝里樹さんが現地を訪ねた記録では、鳥居の奥に「猿田彦大神」の石碑があるだけ。髑髏の形の石も、血の廃屋も、警告の看板も無かった。2007年には近くに汚泥とし尿の処理施設が建ち、周辺は開発が進んでいる。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "じゃあ、なんでそこが「杉沢村」になったんですか？"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "名前の説があります。ウェブサイト「現代奇談」によると、この集落は近所で通称「杉沢村」と呼ばれていた。小杉へ行くことを津軽弁で「杉さ行く」と言い、それが「杉沢」に聞こえた、という見立て。確定ではありません。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "石神神社",
+      "t": "髑髏の石にも候補がある。同じ青森市の石神神社。御神体は高さ2メートルほどの髑髏に似た岩で、眼の穴に丸い石がはまっている。別の場所にある実在の部品が、一つの村に集められた可能性です。",
+      "fx": "dark"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "そして「地図から消えた」の実態。小杉は、天明の飢饉で人が減り、その後も流出が続いて人がいなくなった集落跡とされる。消えたのは一夜の惨劇ではなく、何十年もかけた過疎です。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "皮肉なことに、今グーグルマップで「杉沢村」と検索すると、この場所が出てきます。地図から消されたはずの村は、噂を信じた人たちの手で、地図に新しく登録された。",
+      "fx": ""
+    },
+    {
+      "c": "hasu",
+      "bgm": "ominous",
+      "t": "……消したのは県じゃない……足したのは……あなたたち……"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "その後：映画と、終わらない探索",
+      "scene": "ch5",
+      "t": "第五面。その後です。放送の年、2000年には早くも心霊ドキュメンタリーのビデオ『杉沢村伝説 完全無削除 絶対恐怖版』が出る。翌年、翌々年にも同じ路線のビデオが続いた。",
+      "fx": "fog,pulse"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "2014年 映画化",
+      "t": "2014年には乃木坂46の伊藤寧々さん主演で『杉沢村都市伝説 劇場版』が公開。2015年には脱出ゲームのアプリも出た。噂は20年かけて、怖い話から、はっきりフィクションの娯楽へ移っていった。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "犬鳴村とは、どこが違うんでしょう。似てますよね。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "telop": "犬鳴村との違い",
+      "t": "似ています。地図から消えた村、入口の警告看板、入ったら帰れない。朝里樹さんの整理では、違いは襲ってくる相手。犬鳴村は生きた人間、杉沢村は死者の霊。そして杉沢村には「元の事件」があり、犬鳴村には無い。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "もう一つの違いは、広まり方。犬鳴村は掲示板の探索で育った。杉沢村は、テレビが「潜入して検証する」という型を先に見せた。ヨミノ・ユナさんは、これを全国民が参加できる「終わらない探索ゲーム」と呼ぶ。",
+      "fx": "embers"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "探しに行った人が写真を撮り、地点を登録し、看板を見つけ、または立てる。民俗学でいうオステンション、噂の実演です。その結果が次の探索を呼ぶ。見つからないからこそ、ゲームは終わらない。",
+      "fx": ""
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "chapter": "まとめ：一般化できる条件",
+      "scene": "",
+      "telop": "三つの条件",
+      "t": "第六面。杉沢村から取り出せる条件を三つ。一つ、「隠された」という筋があること。殺人の怖さより、県が消したという疑いが人を動かした。隠蔽の物語は、調査欲を燃料にする。",
+      "fx": ""
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "二つ、本物の部品が各地にあること。津山の事件、新和村の事件、小杉の鳥居、石神神社の岩。どこか一つを調べれば必ず本物に当たるので、全体が本物に見える。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "三つ、見つからないこと。犬鳴峠には行ける場所があった。杉沢村は、そもそも無い。だから探索は終わらず、終わらないから語り続けられる。見つからないことが、この伝説の寿命そのものです。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "normal",
+      "t": "結局、村を消したのは誰だったんでしょう。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "normal",
+      "t": "誰も消していない。飢饉と過疎で人が去った集落に、昭和の事件の記憶と、小説と映画の筋と、別の神社の岩が集まって、無かった村が出来た。消したのではなく、足したんです。足したのは、怖い話を楽しんだ全員。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "今日の結論。杉沢村は存在しない。村人全員が殺された記録も、青森には無い。鳥居のある集落跡は実在するが、そこを消したのは斧ではなく、飢饉と過疎だった。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "地図から消された村は、今、地図に載っている。登録したのは県ではなく、探しに行った人たちです。"
+    },
+    {
+      "c": "mimei",
+      "bgm": "ending",
+      "t": "次回は「テケテケ」。上半身だけで追いかけてくる怪異。北海道の踏切と、カシマさんの系譜と、学校の怪談ブームを分解します。"
+    },
+    {
+      "c": "yomi",
+      "bgm": "ending",
+      "t": "……選ばれたのは、あなたです。チャンネル登録、お願いします。"
+    },
+    {
+      "c": "hasu",
+      "bgm": "ending",
+      "t": "……この先……命の保証は……ありません……"
+    }
+  ]
+}
